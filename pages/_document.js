@@ -4,7 +4,7 @@ import { ThemeScript } from 'components/misc/Theme';
 class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html lang="pt-br">
                 <Head>
                     <ThemeScript />
                 </Head>
