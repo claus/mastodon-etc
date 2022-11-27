@@ -1,19 +1,15 @@
 html {
+    margin: 0;
+    padding: 0;
     font-size: 62.5%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
 }
 
-html,
-body,
-#__next {
-    height: 100%;
-}
-
-#__next {
-  isolation: isolate;
+body {
+    margin: 0;
+    padding: 0;
 }
 
 * {
@@ -24,6 +20,10 @@ body,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+button {
+    all: unset;
 }
 
 img,
@@ -49,7 +49,7 @@ h4,
 h5,
 h6,
 p {
-    font-weight: normal;
+    margin: 0;
     overflow-wrap: break-word;
 }
 
@@ -60,14 +60,19 @@ a {
 ul,
 ol {
     padding: 0;
-    list-style-type: none;
 }
 
-button {
+li {
+
+}
+
+.sr {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
     padding: 0;
-    border: none;
-    color: currentColor;
-    background-color: inherit;
-    user-select: none;
-    cursor: pointer;
+    position: absolute;
 }

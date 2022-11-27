@@ -18,7 +18,7 @@ const PageHead = ({
             {url && <meta key="og-url" property="og:url" content={url} />}
             <meta key="og-type" property="og:type" content="website" />
             <meta key="tw-card" name="twitter:card" content="summary_large_image" />
-            <meta key="tw-creator" name="twitter:creator" content="@madeinhaus" />
+            <meta key="tw-creator" name="twitter:creator" content="@cwahlers" />
             {preloads.map(preload => {
                 const props = {
                     rel: "preload",

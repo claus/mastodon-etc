@@ -1,3 +1,7 @@
 .root {
-    padding: 2rem;
+    padding-top: 3rem;
+
+    > * {
+        grid-column: 1  / -1;
+    }
 }

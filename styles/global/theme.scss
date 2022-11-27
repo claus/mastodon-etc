@@ -1,0 +1,192 @@
+@import 'styles/breakpoints';
+
+@font-face {
+    font-family: 'FiraCode';
+    font-style: normal;
+    src: local(''), url('/fonts/FiraCode-VF.woff2') format('woff2');
+}
+
+:root {
+}
+
+.surface1 {
+    background-color: var(--surface1);
+    color: var(--text2);
+}
+
+.surface2 {
+    background-color: var(--surface2);
+    color: var(--text2);
+}
+
+.surface3 {
+    background-color: var(--surface3);
+    color: var(--text1);
+}
+
+.surface4 {
+    background-color: var(--surface4);
+    color: var(--text1);
+}
+
+.rad-shadow {
+    box-shadow: 0 2.8px 2.2px
+            hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
+        0 6.7px 5.3px
+            hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.01)),
+        0 12.5px 10px
+            hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
+        0 22.3px 17.9px
+            hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
+        0 41.8px 33.4px
+            hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
+        0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+}
+
+body {
+    font-family: 'FiraCode', monospace;
+    font-style: normal;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text2);
+    background-color: var(--surface2);
+}
+
+section {
+    margin: 5rem 0;
+}
+
+h1,
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text1);
+    margin: 1rem 0;
+
+    > span {
+        display: block;
+    }
+}
+
+h1 {
+    margin-top: 0;
+}
+
+h2 {
+    margin-top: 4rem;
+}
+
+p {
+    margin: 1rem 0;
+}
+
+ul,
+ol {
+    padding-left: 3ch;
+    margin: 1rem 0 1rem 1ch;
+    list-style-type: none;
+}
+
+ul {
+    li {
+        position: relative;
+        margin: 1rem 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &::before {
+            content: '-';
+            position: absolute;
+            left: -2ch;
+        }
+    }
+}
+
+ol {
+    counter-reset: item;
+
+    li {
+        position: relative;
+        margin: 5rem 0 1rem;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &::before {
+            content: counter(item);
+            counter-increment: item;
+            position: absolute;
+            left: -2ch;
+            font-size: 1.5em;
+            color: red;
+        }
+    }
+}
+
+a {
+    color: var(--text1);
+    text-decoration: solid underline #888 1px;
+    text-underline-position: under;
+
+    &:hover {
+        font-weight: 700;
+        color: var(--info);
+        text-decoration-color: var(--info);
+        text-decoration-thickness: 2px;
+    }
+}
+
+strong {
+    font-weight: 700;
+    color: var(--text1);
+}
+
+hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid var(--text2);
+}
+
+code {
+    font: inherit;
+    color: var(--text1);
+    background-color: var(--surface1);
+}
+
+em {
+    color: var(--text1);
+}
+
+img {
+    display: block;
+    margin: 1rem 0;
+    height: auto;
+}
+
+@include medium {
+    h1,
+    h2 {
+        > span {
+            display: inline;
+        }
+    }
+
+    img {
+        margin: 2rem;
+    }
+}
+
+@include large {
+}

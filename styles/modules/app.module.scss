@@ -2,51 +2,29 @@
 @import 'styles/fonts';
 
 .main {
-    @include haasRoman;
-    font-size: 1.4rem;
     opacity: 0;
 }
 
 .transition-appear,
 .transition-in {
-    animation: fadeIn 500ms linear forwards;
+    animation: fadeIn 300ms ease-in-out forwards;
 }
 
 .transition-out {
-    animation: fadeOut 500ms linear forwards;
+    animation: fadeOut 300ms ease-in-out forwards;
 }
 
 .transition-idle {
     opacity: 1;
 }
 
-@include medium {
-    .main {
-        font-size: 1.5rem;
-    }
-}
-
-@include large {
-    .main {
-        font-size: 1.6rem;
-    }
-}
-
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
     100% {
         opacity: 1;
     }
 }
 
 @keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
     100% {
         opacity: 0;
     }
