@@ -1,0 +1,44 @@
+---
+title: Emojis personalizados
+publishedAt: '2022-11-26T12:00:00.000Z'
+description: Emoji.
+---
+
+import MDXPostLayout from 'components/ui/MDXPostLayout';
+import EmojiPicker from 'components/ui/EmojiPicker';
+
+<EmojiPicker emojiCategories={props.emojiCategories} emojis={props.emojis} />
+
+export const getStaticProps = async ctx => {
+    try {
+        const domain = ctx.params?.domain ?? 'mastodon.com.br';
+        const api = `https://${domain}/api/v1/custom_emojis`;
+        const response = await fetch(api);
+        const emojis = await response.json();
+        const emojiCategories = emojis
+            .filter(emoji => !!emoji.category)
+            .reduce((acc, emoji) => {
+                const { category } = emoji;
+                if (!acc[category]) acc[category] = [];
+                acc[category].push(emoji);
+                return acc;
+            }, {});
+        return {
+            revalidate: 60,
+            props: {
+                domain,
+                emojiCategories,
+                emojis: emojis.filter(emoji => !emoji.category),
+                ...require('utils/posts').getPostMeta('emoji'),
+            },
+        };
+    } catch (e) {
+        return {
+            notFound: true,
+        };
+    }
+};
+
+export default ({ children, ...props }) => (
+    <MDXPostLayout {...props}>{children}</MDXPostLayout>
+);

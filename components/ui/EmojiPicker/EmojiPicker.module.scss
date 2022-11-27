@@ -1,0 +1,31 @@
+@import 'styles/breakpoints';
+@import 'styles/fonts';
+
+.emojiGrid {
+    columns: 20rem;
+}
+
+.emojiButton {
+    display: block;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        .caption {
+            font-weight: 700;
+            color: var(--text0);
+        }
+    }
+}
+
+.emoji {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.image {
+    width: 3.2rem;
+    height: 3.2rem;
+    margin: 0;
+}

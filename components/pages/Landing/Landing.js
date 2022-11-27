@@ -18,6 +18,7 @@ const Landing = ({ posts }) => {
                         <Link href={`/${post.slug}`}>
                             <Text as="span">{post.data.title}</Text>
                         </Link>
+                        <p>{post.data.description}</p>
                     </li>
                 ))}
             </ul>

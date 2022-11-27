@@ -8,13 +8,6 @@ import Head from 'components/misc/Head';
 import MDXPostLayout from 'components/ui/MDXPostLayout';
 import MDXImage from 'components/ui/MDXImage';
 
-<Head
-    title="Migrar de uma instância para outra"
-    description="Passo-a-passo de como migrar sua conta no Mastodon de uma instância para outra."
-/>
-
-# Migrar de uma instância para outra
-
 Este é o passo-a-passo de como migrar sua conta no Mastodon de uma instância
 para outra. Você **pode migrar tudo** (seguidores, seguidos, silenciados e bloqueados)
 **exceto seus posts e mídia** (você pode exportá-los mas não pode importá-los na
@@ -36,12 +29,7 @@ uma nova conta na instância para a qual você quer mudar.
 
 Role a página, e em _Migrando de outra conta_, clique em _Criar um alias_
 
-<MDXImage
-    src="/images/migrar/migrate-02.png"
-    alt=""
-    width={908}
-    height={236}
-/>
+<MDXImage src="/images/migrar/migrate-02.png" alt="" width={908} height={236} />
 
 Coloque o seu nome de usuário da instância que você está saindo (você encontra
 ele logo abaixo da sua foto no seu perfil)
@@ -55,12 +43,7 @@ ele logo abaixo da sua foto no seu perfil)
 
 O nome de usuário da conta antiga deve aparecer abaixo
 
-<MDXImage
-    src="/images/migrar/migrate-04.png"
-    alt=""
-    width={976}
-    height={190}
-/>
+<MDXImage src="/images/migrar/migrate-04.png" alt="" width={976} height={190} />
 
 ## Exportar dados
 
@@ -76,12 +59,7 @@ O nome de usuário da conta antiga deve aparecer abaixo
 Salve cada um dos arquivos "CSV" disponíveis (não é possível salvar posts e
 seguidores nesse formato)
 
-<MDXImage
-    src="/images/migrar/migrate-06.png"
-    alt=""
-    width={980}
-    height={884}
-/>
+<MDXImage src="/images/migrar/migrate-06.png" alt="" width={980} height={884} />
 
 ## Importar dados
 
@@ -96,12 +74,7 @@ Em seguida **importe** esses aquivos **na nova instância** em _Preferências_ �
 
 Selecione o tipo de arquivo no menu _Tipo de importação_.
 
-<MDXImage
-    src="/images/migrar/migrate-08.png"
-    alt=""
-    width={980}
-    height={924}
-/>
+<MDXImage src="/images/migrar/migrate-08.png" alt="" width={980} height={924} />
 
 Escolha o arquivo a ser importado e então selecione se você quer _Juntar_ ou _Sobrescrever_ o arquivo existente.
 
@@ -131,12 +104,7 @@ Agora voltando para **a instância antiga**, vá em _Preferências_ → _Conta_ 
 
 Role a página e em _Mudar-se para outra conta_, clique em _configurar isso aqui_.
 
-<MDXImage
-    src="/images/migrar/migrate-10.png"
-    alt=""
-    width={908}
-    height={272}
-/>
+<MDXImage src="/images/migrar/migrate-10.png" alt="" width={908} height={272} />
 
 Coloque seu nome de usuário **da nova instância** e sua senha **da instância antiga**
 e clique em _Migrar seguidores_.
@@ -152,7 +120,7 @@ Existe a possibilidade deste último passo não funcionar, pois a instância
 antiga ainda não sabe da existência do alias da nova, caso aconteça tente
 novamente mais tarde.
 
-------
+---
 
 Pronto! Você migrou para uma nova instância!
 
@@ -162,6 +130,9 @@ Pronto! Você migrou para uma nova instância!
     width={1404}
     height={728}
 />
+
+export const getStaticProps =
+    require('utils/posts').getPostStaticProps('migrar');
 
 export default ({ children, ...props }) => (
     <MDXPostLayout {...props}>{children}</MDXPostLayout>

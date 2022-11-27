@@ -11,8 +11,10 @@
             calc(var(--brand-lightness) / 1.5)
     );
 
+    --text0-light: hsl(var(--brand-hue) var(--brand-saturation) 0%);
     --text1-light: hsl(var(--brand-hue) var(--brand-saturation) 10%);
     --text2-light: hsl(var(--brand-hue) 30% 20%);
+    --text0-dark: hsl(var(--brand-hue) 15% 100%);
     --text1-dark: hsl(var(--brand-hue) 15% 85%);
     --text2-dark: hsl(var(--brand-hue) 5% 65%);
 
@@ -35,6 +37,7 @@
         color-scheme: dark;
 
         --brand: var(--brand-dark);
+        --text0: var(--text0-dark);
         --text1: var(--text1-dark);
         --text2: var(--text2-dark);
         --surface1: var(--surface1-dark);
@@ -49,6 +52,7 @@
         color-scheme: light;
 
         --brand: var(--brand-light);
+        --text0: var(--text0-light);
         --text1: var(--text1-light);
         --text2: var(--text2-light);
         --surface1: var(--surface1-light);
