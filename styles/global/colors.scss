@@ -3,10 +3,10 @@
     --brand-saturation: 100%;
     --brand-lightness: 50%;
 
-    --brand-light: hsl(
+    --brand-dark: hsl(
         var(--brand-hue) var(--brand-saturation) var(--brand-lightness)
     );
-    --brand-dark: hsl(
+    --brand-light: hsl(
         var(--brand-hue) calc(var(--brand-saturation) / 2)
             calc(var(--brand-lightness) / 1.5)
     );

@@ -56,3 +56,35 @@ export function fixUrl(url) {
         };
     }
 }
+
+export const compressEmojiJSON = emojis => {
+    if (!Array.isArray(emojis) || emojis.length === 0) {
+        return { baseUrl: '', emojis: [] };
+    }
+    const getMaxBase = (url, maxBaseCurrent) => {
+        if (url.startsWith(maxBaseCurrent)) return maxBaseCurrent;
+        let i = 0;
+        const len = Math.min(url.length, maxBaseCurrent.length);
+        while (i < len && url[i] === maxBaseCurrent[i]) i++;
+        return maxBaseCurrent.slice(0, i);
+    };
+    let maxBase = emojis[0].url;
+    emojis.forEach(emoji => {
+        maxBase = getMaxBase(emoji.url, maxBase);
+        maxBase = getMaxBase(emoji.static_url, maxBase);
+    });
+    const maxBaseLength = maxBase.length;
+    const compressedEmojis = emojis.map(({ category, ...emoji }) => {
+        const result = {
+            code: emoji.shortcode,
+            url: emoji.url.slice(maxBaseLength),
+            static_url: emoji.static_url.slice(maxBaseLength),
+            visible: emoji.visible_in_picker,
+        };
+        return category ? { category, ...result } : result;
+    });
+    return {
+        baseUrl: maxBase,
+        emojis: compressedEmojis,
+    };
+};

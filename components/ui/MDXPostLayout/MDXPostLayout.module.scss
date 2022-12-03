@@ -2,7 +2,7 @@
 @import 'styles/fonts';
 
 .root {
-    padding: var(--grid-margin) 0;
+    padding: 5rem 0;
 
     > * {
         grid-column: 1 / -1;
@@ -11,16 +11,20 @@
 
 @include large {
     .root {
-        > * {
-            grid-column: 1 / -5;
+        .post {
+            > * {
+                grid-column: 1 / -5;
+            }
         }
     }
 }
 
 @include xlarge {
     .root {
-        > * {
-            grid-column: 1 / -6;
+        .post {
+            > * {
+                grid-column: 1 / -5;
+            }
         }
     }
 }

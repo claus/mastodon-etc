@@ -6,13 +6,16 @@ import styles from './MDXPostLayout.module.scss';
 import grid from 'styles/modules/grid.module.scss';
 
 const MDXPostLayout = ({ children, meta = {} }) => {
-    const { title, description } = meta;
+    const { title, description, type = 'post' } = meta;
+    const rootClass = cx(grid.container, styles.root, {
+        [styles.post]: type === 'post',
+    });
     return (
-        <div className={cx(grid.container, styles.root)}>
+        <main className={rootClass}>
             <Head title={title} description={description} />
             <h1>{title}</h1>
             {children}
-        </div>
+        </main>
     );
 };
 
