@@ -20,7 +20,7 @@ const Emoji = ({ emoji, baseUrl, isAnimated }) => {
     const captionClass = cx(styles.caption, { [styles.copied]: isCopied });
     return (
         <button
-            aria-label={emoji.shortcode}
+            aria-label={emoji.code}
             className={styles.emojiButton}
             onClick={handleClick}
         >
