@@ -35,7 +35,7 @@ const Emoji = ({ emoji, baseUrl, isAnimated }) => {
                 alt=""
             />
             <div className={captionClass} aria-disabled="true">
-                {isCopied ? ' copiado ✓' : `:${emoji.code}:`}
+                {isCopied ? 'copiado ✓' : `:${emoji.code}:`}
             </div>
         </button>
     );
