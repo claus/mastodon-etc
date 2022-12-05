@@ -9,7 +9,12 @@ import { compressEmojiJSON } from 'utils';
 import MDXPostLayout from 'components/ui/MDXPostLayout';
 import EmojiPicker from 'components/ui/EmojiPicker';
 
-<EmojiPicker categories={props.categories} baseUrl={props.baseUrl} />
+# Emojis Personalizados da {props.domain}
+
+<EmojiPicker
+    categories={props.categories}
+    baseUrl={props.baseUrl}
+/>
 
 export const getStaticProps = async ctx => {
     const postMeta = require('utils/posts').getPostMeta('emoji');

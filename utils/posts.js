@@ -10,17 +10,14 @@ export const getPost = slug => {
 };
 
 export const getPosts = () => {
-    const cwd = process.cwd();
-    const dir = path.join(cwd, 'pages');
+    const dir = path.join(process.cwd(), 'pages');
     const dirFiles = fs.readdirSync(dir, { withFileTypes: true });
     return dirFiles
+        .filter(dirEntry => dirEntry.name.endsWith('.mdx'))
         .map(dirEntry => {
-            if (dirEntry.name.endsWith('.mdx')) {
-                const slug = dirEntry.name.replace(/.mdx$/, '');
-                return { ...getPost(slug), slug };
-            }
-        })
-        .filter(post => !!post);
+            const slug = dirEntry.name.replace(/.mdx$/, '');
+            return { ...getPost(slug), slug };
+        });
 };
 
 export const getPostMeta = slug => ({
