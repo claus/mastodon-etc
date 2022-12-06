@@ -1,37 +1,53 @@
 :root {
-    --brand-hue: 200;
+    --brand-hue: 0;
     --brand-saturation: 100%;
     --brand-lightness: 50%;
 
     --brand-dark: hsl(
-        var(--brand-hue) var(--brand-saturation) var(--brand-lightness)
+        0 var(--brand-saturation) var(--brand-lightness)
     );
     --brand-light: hsl(
-        var(--brand-hue) calc(var(--brand-saturation) / 2)
+        0 calc(var(--brand-saturation) / 2)
             calc(var(--brand-lightness) / 1.5)
     );
 
-    --text0-light: hsl(var(--brand-hue) var(--brand-saturation) 0%);
-    --text1-light: hsl(var(--brand-hue) var(--brand-saturation) 10%);
-    --text2-light: hsl(var(--brand-hue) 30% 20%);
-    --text0-dark: hsl(var(--brand-hue) 15% 100%);
-    --text1-dark: hsl(var(--brand-hue) 15% 85%);
-    --text2-dark: hsl(var(--brand-hue) 5% 65%);
+    --text0-light: hsl(0 0 0%);
+    --text1-light: hsl(0 0 10%);
+    --text2-light: hsl(0 0 20%);
+    --text0-dark: hsl(0 0 100%);
+    --text1-dark: hsl(0 0 85%);
+    --text2-dark: hsl(0 0 65%);
 
-    --surface1-light: hsl(var(--brand-hue) 25% 90%);
-    --surface2-light: hsl(var(--brand-hue) 20% 99%);
-    --surface3-light: hsl(var(--brand-hue) 20% 92%);
-    --surface4-light: hsl(var(--brand-hue) 20% 85%);
-    --surface1-dark: hsl(var(--brand-hue) 5% 5%);
-    --surface2-dark: hsl(var(--brand-hue) 5% 10%);
-    --surface3-dark: hsl(var(--brand-hue) 5% 20%);
-    --surface4-dark: hsl(var(--brand-hue) 5% 25%);
+    --surface1-light: hsl(0 0 90%);
+    --surface2-light: hsl(0 0 99%);
+    --surface3-light: hsl(0 0 92%);
+    --surface4-light: hsl(0 0 85%);
+    --surface1-dark: hsl(0 0 5%);
+    --surface2-dark: hsl(0 0 10%);
+    --surface3-dark: hsl(0 0 20%);
+    --surface4-dark: hsl(0 0 25%);
 
-    --surface-shadow-light: var(--brand-hue) 10% 20%;
-    --surface-shadow-dark: var(--brand-hue) 50% 3%;
+    --surface-shadow-light: 0 0 20%;
+    --surface-shadow-dark: 0 0 3%;
 
     --shadow-strength-light: 0.02;
     --shadow-strength-dark: 0.8;
+
+    /* Info blue */
+    --info-hue: 203;
+    --info: hsla(var(--info-hue) 100% 100%);
+
+    /* Success green */
+    --success-hue: 120;
+    --success: hsl(var(--success-hue) 100% 100%);
+
+    /* Warning yellow */
+    --warning-hue: 40;
+    --warning: hsl(var(--warning-hue) 100% 100%);
+
+    /* Failure red */
+    --failure-hue: 2;
+    --failure-surface1-dark: hsla(var(--failure-hue) 100% 50% / 0.3);
 
     &[data-theme='dark'] {
         color-scheme: dark;
@@ -46,6 +62,7 @@
         --surface4: var(--surface4-dark);
         --surface-shadow: var(--surface-shadow-dark);
         --shadow-strength: var(--shadow-strength-dark);
+        --failure-surface1: var(--failure-surface1-dark);
     }
 
     &[data-theme='light'] {
@@ -62,52 +79,4 @@
         --surface-shadow: var(--surface-shadow-light);
         --shadow-strength: var(--shadow-strength-light);
     }
-
-    --saturation-bias: 0;
-    --saturation-value: .5;
-    --saturation: calc(var(--saturation-value) + var(--saturation-bias));
-
-    --lightness-bias: 0;
-    --lightness-value: .5;
-    --lightness: calc(var(--lightness-value) + var(--lightness-bias));
-
-    /* Info blue */
-    --info-hue: 203;
-    --info-saturation-bias: 0;
-    --info-lightness-bias: 0;
-
-    --info-hsl: var(--info-hue)
-        calc(100% * (var(--saturation) + var(--info-saturation-bias)))
-        calc(100% * (var(--lightness) + var(--info-lightness-bias)));
-    --info: hsl(var(--info-hsl));
-
-    /* Success green */
-    --success-hue: 120;
-    --success-saturation-bias: 0;
-    --success-lightness-bias: 0;
-
-    --success-hsl: var(--success-hue)
-        calc(100% * (var(--saturation) + var(--success-saturation-bias)))
-        calc(100% * (var(--lightness) + var(--success-lightness-bias)));
-    --success: hsl(var(--success-hsl));
-
-    /* Warning yellow */
-    --warning-hue: 40;
-    --warning-saturation-bias: 0;
-    --warning-lightness-bias: 0;
-
-    --warning-hsl: var(--warning-hue)
-        calc(100% * (var(--saturation) + var(--warning-saturation-bias)))
-        calc(100% * (var(--lightness) + var(--warning-lightness-bias)));
-    --warning: hsl(var(--warning-hsl));
-
-    /* Failure red */
-    --failure-hue: 2;
-    --failure-saturation-bias: 0;
-    --failure-lightness-bias: 0;
-
-    --failure-hsl: var(--failure-hue)
-        calc(100% * (var(--saturation) + var(--failure-saturation-bias)))
-        calc(100% * (var(--lightness) + var(--failure-lightness-bias)));
-    --failure: hsl(var(--failure-hsl));
 }

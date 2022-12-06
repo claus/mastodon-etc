@@ -63,8 +63,23 @@ const EmojiCategory = ({ baseUrl, category, emojis, isAnimated }) => {
     );
 };
 
-const EmojiPicker = ({ categories, baseUrl }) => {
-    if (!categories) return null;
+const EmojiPicker = ({ categories, baseUrl, status, statusText }) => {
+    if (status >= 400) {
+        return (
+            <div className={styles.error}>
+                <h2 className={styles.errorTitle}>Erro {status}</h2>
+                <p className={styles.errorMessage}>{statusText}</p>
+            </div>
+        );
+    } else if (!categories || Object.keys(categories).length === 0) {
+        return (
+            <div className={styles.error}>
+                <p className={styles.errorMessage}>
+                    Não tem emojis personalizados nessa instância.
+                </p>
+            </div>
+        );
+    }
     const isAnimated = true;
     return (
         <div className={cx(styles.root)}>
@@ -98,8 +113,10 @@ const EmojiPicker = ({ categories, baseUrl }) => {
 };
 
 EmojiPicker.propTypes = {
-    categories: PropTypes.object.isRequired,
-    baseUrl: PropTypes.string.isRequired,
+    categories: PropTypes.object,
+    baseUrl: PropTypes.string,
+    status: PropTypes.number,
+    statusText: PropTypes.string,
 };
 
 export default EmojiPicker;

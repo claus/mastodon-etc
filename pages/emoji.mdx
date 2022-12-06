@@ -6,6 +6,7 @@ description: Emoji.
 ---
 
 import { compressEmojiJSON } from 'utils';
+import { resolveError } from 'utils/emoji';
 import MDXPostLayout from 'components/ui/MDXPostLayout';
 import EmojiPicker from 'components/ui/EmojiPicker';
 
@@ -14,9 +15,12 @@ import EmojiPicker from 'components/ui/EmojiPicker';
 <EmojiPicker
     categories={props.categories}
     baseUrl={props.baseUrl}
+    status={props.status}
+    statusText={props.statusText}
 />
 
 export const getStaticProps = async ctx => {
+    const fetchTimeout = 5;
     const postMeta = require('utils/posts').getPostMeta('emoji');
     const domain = ctx.params?.domain ?? 'mastodon.com.br';
     const api = `https://${domain}/api/v1/custom_emojis`;
@@ -32,11 +36,16 @@ export const getStaticProps = async ctx => {
         };
     };
     try {
-        const response = await fetch(api);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(
+            () => controller.abort(),
+            fetchTimeout * 1000
+        );
+        const response = await fetch(api, { signal: controller.signal });
         if (response.status >= 400) {
             return getStaticPropsResponse({
                 status: response.status,
-                statusText: response.statusText,
+                statusText: `Error accessing Emoji API on ${domain} ("${response.statusText}")`,
             });
         }
         const json = await response.json();
@@ -53,10 +62,7 @@ export const getStaticProps = async ctx => {
             status: response.status,
         });
     } catch (e) {
-        return getStaticPropsResponse({
-            status: 500,
-            statusText: e.message,
-        });
+        return getStaticPropsResponse(resolveError(e, domain, fetchTimeout));
     }
 };
 

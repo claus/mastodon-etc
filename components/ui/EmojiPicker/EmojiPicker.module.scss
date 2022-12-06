@@ -52,6 +52,22 @@
     }
 }
 
+.error {
+    padding: 1.5ch 2ch;
+    margin-top: 5rem;
+    background-color: var(--failure-surface1);
+
+    .errorTitle,
+    .errorMessage {
+        margin: 0;
+        color: var(--text1);
+    }
+
+    .errorMessage {
+        font-weight: 700;
+    }
+}
+
 @include small {
     .emojiGrid {
         --width: calc(3 * var(--grid-col-width) + 2 * var(--grid-gap));
