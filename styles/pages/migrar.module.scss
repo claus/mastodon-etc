@@ -1,0 +1,6 @@
+.headline {
+    &::before {
+        content: counter(headlines) '. ';
+        counter-increment: headlines;
+    }
+}

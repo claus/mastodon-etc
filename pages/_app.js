@@ -1,5 +1,6 @@
 // Resets, global styles
 import 'styles/global/reset.scss';
+import 'styles/global/fonts.scss';
 import 'styles/global/theme.scss';
 
 // Global CSS variable definitions

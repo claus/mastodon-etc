@@ -2,29 +2,22 @@
 @import 'styles/fonts';
 
 .root {
-    padding: 5rem 0;
-
     > * {
         grid-column: 1 / -1;
     }
 }
 
 @include large {
-    .root {
-        .post {
-            > * {
-                grid-column: 1 / -5;
-            }
+    .post {
+        > * {
+            grid-column: 1 / -6;
         }
-    }
-}
 
-@include xlarge {
-    .root {
-        .post {
-            > * {
-                grid-column: 1 / -5;
-            }
+        > h1,
+        > h2,
+        > img {
+            grid-column: 1 / -1;
         }
+
     }
 }

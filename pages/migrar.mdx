@@ -8,6 +8,8 @@ import Head from 'components/misc/Head';
 import MDXPostLayout from 'components/ui/MDXPostLayout';
 import MDXImage from 'components/ui/MDXImage';
 
+import styles from 'styles/pages/migrar.module.scss';
+
 Este é o passo-a-passo de como migrar sua conta no Mastodon de uma instância
 para outra. Você **pode migrar tudo** (seguidores, seguidos, silenciados e bloqueados)
 **exceto seus posts e mídia** (você pode exportá-los mas não pode importá-los na
@@ -16,9 +18,10 @@ nova instância).
 Primeiro de tudo, para migrar de uma instância para outra, você deve fazer
 uma nova conta na instância para a qual você quer mudar.
 
-## Criar um alias
 
-**Na nova instância** vá em _Preferências_ → _Conta_ → _Configurações da conta_
+<h2 className={styles.headline}>Criar um alias</h2>
+
+**Na nova instância**, nas _Preferências_ vá em _Conta_ → _Configurações da conta_
 
 <MDXImage
     src="/images/migrar/migrate-01.png"
@@ -31,7 +34,7 @@ Role a página, e em _Migrando de outra conta_, clique em _Criar um alias_
 
 <MDXImage src="/images/migrar/migrate-02.png" alt="" width={908} height={236} />
 
-Coloque o seu nome de usuário da instância que você está saindo (você encontra
+Coloque o seu nome de usuário **da instância antiga** (você encontra
 ele logo abaixo da sua foto no seu perfil)
 
 <MDXImage
@@ -45,9 +48,10 @@ O nome de usuário da conta antiga deve aparecer abaixo
 
 <MDXImage src="/images/migrar/migrate-04.png" alt="" width={976} height={190} />
 
-## Exportar dados
 
-**Na instância antiga** faça backup dos seus dados em _Preferências_ → _Importar e exportar_ → _Exportar dados_
+<h2 className={styles.headline}>Exportar dados</h2>
+
+**Na instância antiga** faça backup dos seus dados nas _Preferências_ em _Importar e exportar_ → _Exportar dados_
 
 <MDXImage
     src="/images/migrar/migrate-05.png"
@@ -61,9 +65,10 @@ seguidores nesse formato)
 
 <MDXImage src="/images/migrar/migrate-06.png" alt="" width={980} height={884} />
 
-## Importar dados
 
-Em seguida **importe** esses aquivos **na nova instância** em _Preferências_ → _Importar e exportar_ → _Importar_
+<h2 className={styles.headline}>Importar dados</h2>
+
+Em seguida **importe** esses aquivos **na nova instância** nas _Preferências_ em _Importar e exportar_ → _Importar_
 
 <MDXImage
     src="/images/migrar/migrate-07.png"
@@ -91,9 +96,10 @@ Repita o procedimento para cada arquivo:
 -   Lista de silenciados: `muted_accounts.csv`
 -   Lista de dominios bloqueados: `blocked_domains.csv`
 
-## Mudar-se para outra conta
 
-Agora voltando para **a instância antiga**, vá em _Preferências_ → _Conta_ → _Configurações da conta_
+<h2 className={styles.headline}>Mudar-se para outra conta</h2>
+
+Agora voltando para **a instância antiga**, nas _Preferências_ vá em _Conta_ → _Configurações da conta_
 
 <MDXImage
     src="/images/migrar/migrate-09.png"
@@ -122,7 +128,9 @@ novamente mais tarde.
 
 ---
 
-Pronto! Você migrou para uma nova instância!
+## Pronto!
+
+Você migrou para uma nova instância!
 
 <MDXImage
     src="/images/migrar/migrate-12.png"

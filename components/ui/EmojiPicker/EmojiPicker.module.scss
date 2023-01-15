@@ -10,6 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--gap-vertical) var(--grid-gap);
+    margin-top: 1.5rem;
 }
 
 .emojiButton {
@@ -21,13 +22,15 @@
     width: var(--width);
     cursor: pointer;
 
-    &:hover {
-        .caption {
-            font-weight: 700;
-            color: var(--text0);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            .caption {
+                font-weight: 700;
+                color: var(--text0);
 
-            &.copied {
-                color: var(--brand);
+                &.copied {
+                    color: var(--success);
+                }
             }
         }
     }
@@ -48,7 +51,7 @@
 
     &.copied {
         font-weight: 700;
-        color: var(--brand);
+        color: var(--success);
     }
 }
 
