@@ -1,0 +1,32 @@
+---
+import Head from '@/components/misc/Head/Head.astro';
+import styles from './MDXPostLayout.module.css';
+
+interface Props {
+    title?: string;
+    description?: string;
+    type?: 'post' | 'app';
+    meta?: {
+        title?: string;
+        description?: string;
+        type?: 'post' | 'app';
+    };
+    frontmatter?: {
+        title?: string;
+        description?: string;
+        type?: 'post' | 'app';
+    };
+}
+
+const props = Astro.props;
+const meta = props.frontmatter || props.meta || props;
+const { title = '', description = '', type = 'post' } = meta;
+
+const isPost = type === 'post';
+---
+
+<main class:list={['grid', styles.root, { [styles.post]: isPost }]}>
+    <Head title={title} description={description} />
+    {isPost && <h1>{title}</h1>}
+    <slot />
+</main>

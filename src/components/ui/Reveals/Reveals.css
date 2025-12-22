@@ -1,0 +1,124 @@
+[data-type='splitter'] {
+    font-kerning: none;
+    font-feature-settings: 'kern' off;
+}
+
+[data-type='char'],
+[data-type='space'],
+[data-type='whitelisted'] {
+    margin-right: var(--kerning, 0);
+}
+
+[data-type='space']:first-child,
+[data-type='space']:last-child {
+    margin-right: 0;
+}
+
+[data-type='line'] {
+    display: inline-block;
+    white-space: nowrap;
+
+    [data-type='char'],
+    [data-type='space'],
+    [data-type='whitelisted'] {
+        display: inline-block;
+        text-decoration: inherit;
+        vertical-align: top;
+    }
+
+    [data-type='char'],
+    [data-type='whitelisted'] {
+        position: relative;
+
+        [data-type='char-inner'],
+        [data-type='whitelisted-inner'] {
+            display: inline-block;
+            text-decoration: inherit;
+        }
+    }
+
+    [data-type='space']:not(:first-child, :last-child) {
+        white-space: pre;
+    }
+
+    br {
+        display: none;
+    }
+}
+
+[data-type='kern'],
+[data-type='nokern'] {
+    position: absolute;
+
+    > div {
+        all: unset;
+        display: block;
+        white-space: pre;
+        width: fit-content;
+    }
+}
+
+[data-type='kern'] {
+    font-kerning: normal;
+    font-feature-settings: 'kern' on;
+}
+
+[data-type='nokern'] {
+    font-kerning: none;
+    font-feature-settings: 'kern' off;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+h1,
+h2,
+[data-reveal] {
+    :where(&[data-type='splitter']) {
+        &:not([data-reveal='none'], [data-reveal='block']) {
+            [data-type='line'] {
+                --block-inset: -0.2em;
+                display: block;
+                clip-path: inset(var(--block-inset) -1em);
+            }
+
+            [data-type='line-inner'] {
+                display: inline-block;
+                transform: translate3d(0, calc(1lh - var(--block-inset)), 0);
+                transition: transform var(--duration, 0.5s)
+                    calc(var(--line-index) * var(--stagger, 0.075s)) ease;
+            }
+        }
+    }
+}
+
+h1,
+h2,
+[data-reveal] {
+    &:not([data-reveal='none'], [data-reveal='block']) {
+        opacity: 0.001;
+        display: block !important; /* force block (RichText sets this to flex) */
+        hyphens: none !important;
+        overflow-wrap: normal !important;
+
+        &[data-reveal-state] {
+            opacity: 1;
+
+            [data-type='line-inner'] {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    }
+}
+
+[data-reveal='block'] {
+    opacity: 0.001;
+    transform: translate3d(0, 5rem, 0);
+    transition:
+        opacity var(--duration, 1s) var(--delay, 0s) ease-in,
+        transform var(--duration, 1s) var(--delay, 0s) ease;
+
+    &[data-reveal-state] {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+/* stylelint-enable no-duplicate-selectors */

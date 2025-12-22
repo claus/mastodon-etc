@@ -1,0 +1,8 @@
+.image {
+    opacity: 0.001;
+    transition: opacity 0.6s linear;
+
+    &:global(.loaded) {
+        opacity: 1;
+    }
+}

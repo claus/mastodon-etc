@@ -1,0 +1,55 @@
+.root {
+    padding: 3rem 0;
+}
+
+.section {
+    grid-column: 1 / -1;
+
+    &:not(:first-of-type) {
+        margin-top: 3rem;
+    }
+}
+
+.sectionHeadline {
+    margin-bottom: 1rem;
+    font-size: 1.4em;
+}
+
+.themeButtons {
+    display: flex;
+    position: relative;
+    margin: -0.5rem 0 0 -1rem;
+}
+
+.themeButton {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: -0.85rem;
+    }
+}
+
+[data-theme-value='light'] .themeButton[data-theme='light'],
+[data-theme-value='dark'] .themeButton[data-theme='dark'],
+[data-theme-value='auto'] .themeButton[data-theme='auto'] {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.link {
+    padding: 0.5rem 0;
+
+    &:first-of-type {
+        padding-top: 0;
+    }
+
+    > a {
+        text-decoration-color: #888;
+        text-underline-offset: 0.4rem;
+    }
+}

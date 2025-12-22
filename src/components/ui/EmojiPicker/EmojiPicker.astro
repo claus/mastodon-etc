@@ -1,0 +1,112 @@
+---
+import styles from './EmojiPicker.module.css';
+
+interface Emoji {
+    code: string;
+    url: string;
+    static_url: string;
+    visible: boolean;
+    category?: string;
+}
+
+interface Props {
+    categories: Record<string, Emoji[]>;
+    baseUrl: string;
+    status: number;
+    statusText?: string;
+}
+
+const { categories, baseUrl, status, statusText } = Astro.props;
+
+const isAnimated = true;
+---
+
+{status >= 400 ? (
+    <div class={styles.error}>
+        <h2 class={styles.errorTitle}>Erro {status}</h2>
+        <p class={styles.errorMessage}>{statusText}</p>
+    </div>
+) : !categories || Object.keys(categories).length === 0 ? (
+    <div class={styles.error}>
+        <p class={styles.errorMessage}>
+            Não tem emojis personalizados nessa instância.
+        </p>
+    </div>
+) : (
+    <div class={styles.root}>
+        {Object.entries(categories)
+            .sort(([a], [b]) => a.toLowerCase().localeCompare(b.toLowerCase()))
+            .map(([category, emojis]) => (
+                <div class={styles.emojiCategory}>
+                    <h2>{category || 'Sem categoria'}</h2>
+                    <div class={styles.emojiGrid}>
+                        {emojis
+                            .sort((a, b) => a.code.toLowerCase().localeCompare(b.code.toLowerCase()))
+                            .map((emoji) => {
+                                const src = baseUrl + (isAnimated ? emoji.url : emoji.static_url);
+                                return (
+                                    <button
+                                        aria-label={emoji.code}
+                                        class:list={[styles.emojiButton, 'emoji-btn']}
+                                        data-code={emoji.code}
+                                    >
+                                        <img
+                                            class={styles.image}
+                                            aria-disabled="true"
+                                            src={src}
+                                            width="32"
+                                            height="32"
+                                            decoding="async"
+                                            loading="lazy"
+                                            alt=""
+                                        />
+                                        <div class:list={[styles.caption, 'emoji-caption']} aria-disabled="true">
+                                            :{emoji.code}:
+                                        </div>
+                                    </button>
+                                );
+                            })}
+                    </div>
+                </div>
+            ))}
+    </div>
+)}
+
+<script>
+    function setupEmojiButtons() {
+        const buttons = document.querySelectorAll('.emoji-btn');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const code = button.getAttribute('data-code');
+                const caption = button.querySelector('.emoji-caption');
+
+                if (code && caption) {
+                    navigator.clipboard.writeText(`:${code}:`).then(() => {
+                        caption.textContent = 'copiado ✓';
+                        caption.classList.add('copied');
+
+                        setTimeout(() => {
+                            caption.textContent = `:${code}:`;
+                            caption.classList.remove('copied');
+                        }, 700);
+                    });
+                }
+            });
+        });
+    }
+
+    // Run on initial load
+    setupEmojiButtons();
+
+    // Run on view transitions navigation
+    document.addEventListener('astro:page-load', setupEmojiButtons);
+</script>
+
+<style>
+    /* Add any necessary style overrides here if module doesn't cover it */
+    .copied {
+        font-weight: 700;
+        color: var(--success);
+    }
+</style>

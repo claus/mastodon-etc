@@ -1,0 +1,23 @@
+---
+import styles from './LazyImage.module.css';
+
+interface Props {
+    src: string;
+    alt?: string;
+    className?: string;
+}
+
+const { src, alt, className } = Astro.props;
+---
+
+<x-lazy-image>
+    <img data-src={src} class:list={[styles.image, className]} alt={alt ?? ''} decoding="async" />
+</x-lazy-image>
+
+<script>
+    import LazyImage from './LazyImage';
+
+    if (!customElements.get('x-lazy-image')) {
+        customElements.define('x-lazy-image', LazyImage);
+    }
+</script>

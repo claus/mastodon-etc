@@ -1,0 +1,10 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Landing from '@/components/pages/Landing/Landing.astro';
+
+const posts = Object.values(import.meta.glob('./*.mdx', { eager: true }));
+---
+
+<Layout>
+    <Landing posts={posts} />
+</Layout>

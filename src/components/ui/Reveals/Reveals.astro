@@ -1,0 +1,175 @@
+---
+import './Reveals.css';
+---
+
+<script>
+    import { split } from '@/utils/splitter';
+    import { moveAttributes, moveChildNodes } from '@/utils/splitter/dom';
+    import type { SplitOptions } from '@/utils/splitter/types';
+
+    class RevealController {
+        private revealElements: RevealElement[] = [];
+        private kerningCache: Map<string, number> = new Map();
+
+        constructor() {
+            document.addEventListener('astro:before-swap', this.beforeSwapHandler.bind(this));
+            document.addEventListener('astro:after-swap', this.afterSwapHandler.bind(this));
+            this.initialize();
+        }
+
+        private beforeSwapHandler() {
+            this.destroy();
+        }
+
+        private afterSwapHandler() {
+            this.initialize();
+        }
+
+        private initialize() {
+            const splitOptions: Required<SplitOptions> = {
+                whitelistSelectors: ['img', 'svg'],
+                graphemeSplitter: (str: string) => [...str.normalize('NFC')],
+                kerningCache: this.kerningCache,
+                kerningCacheKey: (a: string, b: string) => `${a}-${b}`,
+                doubleWrap: 'lines',
+                splitLines: true,
+                fixKerning: true,
+                debug: false,
+            };
+            this.revealElements = [...document.querySelectorAll('h1, h2, [data-reveal]')]
+                .filter(element => element instanceof HTMLElement)
+                .filter(element => element.dataset.reveal !== 'none')
+                .map(element => {
+                    const type = element.matches('h1, h2, [data-reveal="lines"]')
+                        ? 'lines'
+                        : 'block';
+                    return new RevealElement({ type, element, splitOptions });
+                });
+            this.revealElements.forEach(instance => instance.init());
+        }
+
+        private destroy() {
+            this.revealElements.forEach(instance => instance.destroy());
+            this.revealElements.length = 0;
+        }
+    }
+
+    type RevealType = 'lines' | 'block';
+
+    interface RevealOptions {
+        type: RevealType;
+        element: HTMLElement;
+        splitOptions: Required<SplitOptions>;
+    }
+
+    class RevealElement {
+        private type: RevealType;
+        private element: HTMLElement;
+        private elementCopy?: HTMLElement;
+        private splitOptions: Required<SplitOptions>;
+        private intersectionObserver: IntersectionObserver | null = null;
+        private handleIntersectionBound: (entries: IntersectionObserverEntry[]) => void;
+        private handleTransitionEndBound: (event: TransitionEvent) => void;
+        private timeout: number = 0;
+        private totalLines?: number;
+
+        constructor({ type, element, splitOptions }: RevealOptions) {
+            this.type = type;
+            this.element = element;
+            this.splitOptions = splitOptions;
+            this.handleIntersectionBound = this.handleIntersection.bind(this);
+            this.handleTransitionEndBound = this.handleTransitionEnd.bind(this);
+        }
+
+        init() {
+            this.intersectionObserver = new IntersectionObserver(this.handleIntersectionBound);
+            this.intersectionObserver.observe(this.element);
+
+            if (this.type === 'lines') {
+                this.elementCopy = this.element.cloneNode(true) as HTMLElement;
+
+                // For debugging: Click element to toggle split
+                // this.element.addEventListener('click', () => {
+                //     if (this.element.dataset.type === 'splitter') {
+                //         const elementCopy = this.elementCopy!.cloneNode(true) as HTMLElement;
+                //         moveChildNodes(elementCopy, this.element);
+                //         moveAttributes(elementCopy, this.element);
+                //         this.element.dataset.revealState = this.type;
+                //     } else {
+                //         split(this.element, this.splitOptions);
+                //     }
+                // });
+            }
+        }
+
+        destroy() {
+            window.clearTimeout(this.timeout);
+            this.destroyIntersectionObserver();
+            this.element.removeEventListener('transitionend', this.handleTransitionEndBound);
+        }
+
+        private handleIntersection([entry]: IntersectionObserverEntry[]) {
+            if (entry.isIntersecting) {
+                this.destroyIntersectionObserver();
+                if (this.type === 'lines') {
+                    this.timeout = window.setTimeout(() => {
+                        const { totalLines } = split(this.element, this.splitOptions);
+                        this.totalLines = totalLines;
+                        this.timeout = window.setTimeout(() => {
+                            this.reveal();
+                        }, 50);
+                    }, 50);
+                } else if (this.type === 'block') {
+                    this.reveal();
+                }
+            }
+        }
+
+        private reveal() {
+            const duration = this.element.dataset.revealDuration;
+            const delay = this.element.dataset.revealDelay;
+            const stagger = this.element.dataset.revealStagger;
+
+            if (duration) {
+                this.element.style.setProperty('--duration', duration);
+            }
+            if (delay) {
+                this.element.style.setProperty('--delay', delay);
+            }
+            if (stagger) {
+                this.element.style.setProperty('--stagger', stagger);
+            }
+            this.element.dataset.revealState = this.type;
+
+            if (this.type === 'lines') {
+                this.element.addEventListener('transitionend', this.handleTransitionEndBound);
+            }
+        }
+
+        private handleTransitionEnd(event: TransitionEvent) {
+            if (this.totalLines && (event.target as HTMLElement).matches("[data-type^='line']")) {
+                this.totalLines--;
+                if (this.totalLines === 0) {
+                    // Revert split
+                    const elementCopy = this.elementCopy!.cloneNode(true) as HTMLElement;
+                    moveChildNodes(elementCopy, this.element);
+                    moveAttributes(elementCopy, this.element);
+                    this.element.dataset.revealState = 'lines';
+                    this.element.removeEventListener(
+                        'transitionend',
+                        this.handleTransitionEndBound
+                    );
+                }
+            }
+        }
+
+        private destroyIntersectionObserver() {
+            if (this.intersectionObserver) {
+                this.intersectionObserver.disconnect();
+                this.intersectionObserver = null;
+            }
+        }
+    }
+
+    new RevealController();
+</script>

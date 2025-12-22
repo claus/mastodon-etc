@@ -1,0 +1,51 @@
+@import '@/styles/breakpoints.css';
+
+:root {
+    --grid-margin: 20px;
+    --grid-gap: 10px;
+    --grid-columns: 6;
+
+    --grid-content-width: calc(100vw - var(--grid-margin) * 2);
+    --grid-gaps-width: calc((var(--grid-columns) - 1) * var(--grid-gap));
+    --grid-cols-width: calc(var(--grid-content-width) - var(--grid-gaps-width));
+    --grid-col-width: calc(var(--grid-cols-width) / var(--grid-columns));
+}
+
+@media (--medium) {
+    :root {
+        --grid-margin: 50px;
+        --grid-gap: 20px;
+    }
+}
+
+@media (--large) {
+    :root {
+        --grid-columns: 12;
+    }
+}
+
+@media (--xlarge) {
+    :root {
+        --grid-margin: calc(50px + (100vw - 1600px) / 2);
+    }
+}
+
+.grid {
+    display: grid;
+    width: calc(100% - var(--grid-margin) * 2) !important;
+    margin-inline: var(--grid-margin) !important;
+    gap: 0 var(--grid-gap);
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    grid-template-rows: auto;
+    grid-auto-flow: row dense;
+}
+
+.grid-nested {
+    display: grid;
+    width: 100% !important;
+    margin-inline: 0 !important;
+    gap: 0 var(--grid-gap);
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    grid-template-rows: auto;
+    grid-auto-flow: row dense;
+}

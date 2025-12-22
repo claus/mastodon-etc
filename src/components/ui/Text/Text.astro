@@ -1,0 +1,16 @@
+---
+import styles from './Text.module.css';
+
+interface Props {
+    as?: string;
+    theme?: 'body';
+    class?: string;
+    [key: string]: any;
+}
+
+const { as: Element = 'p', theme = 'body', class: className, ...props } = Astro.props;
+---
+
+<Element class:list={[styles[theme], className]} {...props}>
+    <slot />
+</Element>

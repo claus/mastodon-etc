@@ -1,0 +1,47 @@
+---
+// Global styles
+import '@/styles/global/reset.css';
+import '@/styles/global/grid.css';
+import '@/styles/global/colors.css';
+import '@/styles/global/variables.css';
+import '@/styles/global/typography.css';
+import '@/styles/global/defaults.css';
+import '@/styles/global/theme.css';
+
+import { ClientRouter } from 'astro:transitions';
+import ReplacementSwap from 'astro-vtbot/components/ReplacementSwap.astro';
+
+import Header from '@/components/ui/Header/Header.astro';
+import ThemeInit from '@/components/ui/Theme/ThemeInit.astro';
+import GridOverlay from '@/components/ui/GridOverlay/GridOverlay.astro';
+import Reveals from '@/components/ui/Reveals/Reveals.astro';
+
+import styles from './Layout.module.css';
+
+interface Props {}
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="title" content="HAUS Astro TS Starter" />
+        <meta name="description" content="HAUS Astro Starter Description" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>HAUS Astro TS Starter</title>
+        <ThemeInit />
+        <ClientRouter />
+        <ReplacementSwap />
+        <Reveals />
+    </head>
+    <body>
+        <Header />
+        <main class:list={[styles.main, 'body']} data-vtbot-replace="main">
+            <slot />
+        </main>
+        <GridOverlay />
+    </body>
+</html>

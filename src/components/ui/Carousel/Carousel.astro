@@ -1,0 +1,73 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+import type { CarouselOptions, CarouselProps } from './types';
+
+import cx from 'clsx';
+
+import styles from './Carousel.module.css';
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag; itemAs?: Tag }> &
+    CarouselOptions &
+    CarouselProps;
+
+const {
+    as: Container = 'ul',
+    itemAs: Item = 'li',
+    items,
+    class: className,
+    itemClass: itemClassName,
+    ...props
+} = Astro.props;
+
+const {
+    direction,
+    align,
+    damping,
+    disableSnap,
+    enableVerticalScroll,
+    enableNavigationGestures,
+    ...rest
+} = props;
+
+const options = {
+    direction,
+    align,
+    damping,
+    disableSnap,
+    enableVerticalScroll,
+    enableNavigationGestures,
+};
+
+const renderedItems: string[] = Astro.slots.has('default')
+    ? await Promise.all(
+          items.map((item: any, i: number) => {
+              return Astro.slots.render('default', [item, i]);
+          })
+      )
+    : [];
+---
+
+<haus-carousel
+    data-options={JSON.stringify(options)}
+    data-props={JSON.stringify({ as: Container, itemAs: Item })}
+    class={styles.container}
+    {...rest}
+>
+    <Container class={cx(styles.root, className)}>
+        {
+            renderedItems.map(renderedItem => (
+                <Item className={cx(styles.item, itemClassName)}>
+                    <Fragment set:html={renderedItem} />
+                </Item>
+            ))
+        }
+    </Container>
+</haus-carousel>
+
+<script>
+    import { Carousel } from './Carousel';
+
+    if (!customElements.get('haus-carousel')) {
+        customElements.define('haus-carousel', Carousel);
+    }
+</script>

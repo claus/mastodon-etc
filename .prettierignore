@@ -1,4 +1,9 @@
+tsconfig.json
 package-lock.json
 package.json
-public/
-pages/_document.js
+README.md
+.vscode
+node_modules
+public
+src/services/graphql/types.ts
+_contentful
