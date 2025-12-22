@@ -39,13 +39,3 @@
     grid-template-rows: auto;
     grid-auto-flow: row dense;
 }
-
-.grid-nested {
-    display: grid;
-    width: 100% !important;
-    margin-inline: 0 !important;
-    gap: 0 var(--grid-gap);
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-    grid-template-rows: auto;
-    grid-auto-flow: row dense;
-}

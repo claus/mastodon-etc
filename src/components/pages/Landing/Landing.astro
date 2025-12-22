@@ -1,7 +1,6 @@
 ---
 import Link from '@/components/ui/Link/Link.astro';
 import Text from '@/components/ui/Text/Text.astro';
-import Head from '@/components/misc/Head/Head.astro';
 import styles from './Landing.module.css';
 
 interface Props {
@@ -12,16 +11,17 @@ const { posts } = Astro.props;
 ---
 
 <div class:list={['grid', styles.root]}>
-    <Head title="etc.mastodon.com.br" description="....." />
     <h1>Et Cetera</h1>
     <ul>
-        {posts.map(post => (
-            <li>
-                <Link href={post.url}>
-                    <Text as="span">{post.frontmatter.title}</Text>
-                </Link>
-                <p>{post.frontmatter.description}</p>
-            </li>
-        ))}
+        {
+            posts.map(post => (
+                <li>
+                    <Link href={post.url}>
+                        <Text as="span">{post.frontmatter.title}</Text>
+                    </Link>
+                    <p>{post.frontmatter.description}</p>
+                </li>
+            ))
+        }
     </ul>
 </div>

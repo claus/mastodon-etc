@@ -8,13 +8,11 @@ import '@/styles/global/typography.css';
 import '@/styles/global/defaults.css';
 import '@/styles/global/theme.css';
 
+import { Font } from 'astro:assets';
 import { ClientRouter } from 'astro:transitions';
-import ReplacementSwap from 'astro-vtbot/components/ReplacementSwap.astro';
 
-import Header from '@/components/ui/Header/Header.astro';
 import ThemeInit from '@/components/ui/Theme/ThemeInit.astro';
 import GridOverlay from '@/components/ui/GridOverlay/GridOverlay.astro';
-import Reveals from '@/components/ui/Reveals/Reveals.astro';
 
 import styles from './Layout.module.css';
 
@@ -32,14 +30,13 @@ interface Props {}
         <link rel="sitemap" href="/sitemap-index.xml" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <title>HAUS Astro TS Starter</title>
+        <Font cssVariable="--font-atkinson" preload />
+        <Font cssVariable="--font-fira" />
         <ThemeInit />
         <ClientRouter />
-        <ReplacementSwap />
-        <Reveals />
     </head>
     <body>
-        <Header />
-        <main class:list={[styles.main, 'body']} data-vtbot-replace="main">
+        <main class:list={[styles.main, 'body']}>
             <slot />
         </main>
         <GridOverlay />

@@ -1,13 +1,5 @@
 @import '@/styles/breakpoints.css';
 
-:root {
-    --header-height: 60px;
-
-    @media (--large) {
-        --header-height: 80px;
-    }
-}
-
 :root[data-theme='light'] {
     --text-color: #111;
     --background-color: #fff;
