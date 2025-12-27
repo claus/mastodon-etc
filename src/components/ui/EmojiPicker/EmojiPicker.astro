@@ -18,7 +18,7 @@ interface Props {
 
 const { categories, baseUrl, status, statusText } = Astro.props;
 
-const isAnimated = true;
+const showStaticVersion = false;
 ---
 
 {
@@ -47,7 +47,8 @@ const isAnimated = true;
                                 )
                                 .map(emoji => {
                                     const src =
-                                        baseUrl + (isAnimated ? emoji.url : emoji.static_url);
+                                        baseUrl +
+                                        (showStaticVersion ? emoji.static_url : emoji.url);
                                     return (
                                         <button aria-label={emoji.code} class={styles.emojiButton}>
                                             <img
