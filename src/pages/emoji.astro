@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import EmojiPicker from '@/components/ui/EmojiPicker/EmojiPicker.astro';
+import { fetchEmojis } from '@/utils/emoji';
+
+const data = await fetchEmojis();
+
+const title = 'Emojis Personalizados';
+const description = 'Emoji.';
+---
+
+<Layout title={title} description={description}>
+    <h1>Emojis Personalizados da {data.domain}</h1>
+
+    <EmojiPicker
+        categories={data.categories}
+        baseUrl={data.baseUrl}
+        status={data.status}
+        statusText={data.statusText}
+    />
+</Layout>

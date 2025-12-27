@@ -32,6 +32,7 @@
     "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/vercel": "^9.0.2",
     "@madeinhaus/utils": "^2.2.0",
     "astro": "^5.16.5",
     "astro-vtbot": "^2.1.9",

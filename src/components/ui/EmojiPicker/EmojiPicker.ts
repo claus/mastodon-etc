@@ -1,0 +1,35 @@
+import { Bind, Listen } from '@/utils/decorators';
+
+export default class EmojiPicker extends HTMLElement {
+    @Bind
+    @Listen('this', 'click')
+    private handleEvent(event: Event) {
+        const target = event.target as HTMLElement;
+        const button = target.closest<HTMLButtonElement>('[data-ref="emoji"]');
+        if (!button) return;
+
+        const code = button.getAttribute('aria-label');
+        const caption = button.querySelector<HTMLDivElement>(':scope > div');
+        if (code && caption) {
+            navigator.clipboard
+                .writeText(`:${code}:`)
+                .then(() => {
+                    caption.textContent = 'copiado ✓';
+                    caption.classList.add('copied');
+                    const prevTimeoutId = caption.dataset.timeoutId;
+                    if (prevTimeoutId) {
+                        window.clearTimeout(Number(prevTimeoutId));
+                    }
+                    const timeoutId = window.setTimeout(() => {
+                        caption.textContent = `:${code}:`;
+                        caption.classList.remove('copied');
+                        delete caption.dataset.timeoutId;
+                    }, 700);
+                    caption.dataset.timeoutId = timeoutId.toString();
+                })
+                .catch(err => {
+                    console.error('Failed to copy emoji:', err);
+                });
+        }
+    }
+}

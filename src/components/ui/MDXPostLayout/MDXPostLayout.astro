@@ -19,12 +19,12 @@ interface Props {
 
 const props = Astro.props;
 const meta = props.frontmatter || props.meta || props;
-const { title = '', description = '', type = 'post' } = meta;
+const { title = 'ETC', description = 'ETC', type = 'post' } = meta;
 
 const isPost = type === 'post';
 ---
 
-<Layout>
+<Layout title={title} description={description}>
     {isPost && <h1>{title}</h1>}
     <slot />
 </Layout>

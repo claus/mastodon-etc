@@ -33,7 +33,7 @@
         color: var(--text0);
     }
 
-    .emojiButton:hover .caption.copied {
+    .emojiButton:hover .caption:global(.copied) {
         color: var(--success);
     }
 }
@@ -52,7 +52,7 @@
     text-overflow: ellipsis;
 }
 
-.caption.copied {
+.caption:global(.copied) {
     font-weight: 700;
     color: var(--success);
 }

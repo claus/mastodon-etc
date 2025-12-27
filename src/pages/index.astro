@@ -1,8 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Landing from '@/components/pages/Landing/Landing.astro';
+import type { MarkdownInstance } from 'astro';
+import type { PostFrontmatter } from '@/types';
 
-const posts = Object.values(import.meta.glob('./*.mdx', { eager: true }));
+const posts = Object.values(
+    import.meta.glob<MarkdownInstance<PostFrontmatter>>('./posts/*.mdx', { eager: true })
+);
 ---
 
 <Layout>
