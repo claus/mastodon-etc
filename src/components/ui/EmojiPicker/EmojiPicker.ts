@@ -5,11 +5,11 @@ export default class EmojiPicker extends HTMLElement {
     @Listen('this', 'click')
     private handleEvent(event: Event) {
         const target = event.target as HTMLElement;
-        const button = target.closest<HTMLButtonElement>('[data-ref="emoji"]');
+        const button = target.closest<HTMLButtonElement>('button:has(.caption)');
         if (!button) return;
 
         const code = button.getAttribute('aria-label');
-        const caption = button.querySelector<HTMLDivElement>(':scope > div');
+        const caption = button.querySelector<HTMLDivElement>(':scope > .caption');
         if (code && caption) {
             navigator.clipboard
                 .writeText(`:${code}:`)
@@ -24,7 +24,7 @@ export default class EmojiPicker extends HTMLElement {
                         caption.textContent = `:${code}:`;
                         caption.classList.remove('copied');
                         delete caption.dataset.timeoutId;
-                    }, 700);
+                    }, 1000);
                     caption.dataset.timeoutId = timeoutId.toString();
                 })
                 .catch(err => {

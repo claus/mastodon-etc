@@ -49,11 +49,7 @@ const isAnimated = true;
                                     const src =
                                         baseUrl + (isAnimated ? emoji.url : emoji.static_url);
                                     return (
-                                        <button
-                                            aria-label={emoji.code}
-                                            class={styles.emojiButton}
-                                            data-ref="emoji"
-                                        >
+                                        <button aria-label={emoji.code} class={styles.emojiButton}>
                                             <img
                                                 class={styles.image}
                                                 aria-disabled="true"
@@ -65,7 +61,7 @@ const isAnimated = true;
                                                 alt=""
                                             />
                                             <div
-                                                class:list={[styles.caption, 'emoji-caption']}
+                                                class:list={[styles.caption, 'caption']}
                                                 aria-disabled="true"
                                             >
                                                 :{emoji.code}:
