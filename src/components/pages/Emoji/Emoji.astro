@@ -48,7 +48,7 @@ const showStaticEmoji = false;
                             a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase())
                         )
                         .map(([category, emojis]) => (
-                            <div class={styles.emojiCategory}>
+                            <section class={styles.emojiCategory}>
                                 <h2>{category || 'Sem categoria'}</h2>
                                 <div class={styles.emojiGrid}>
                                     {emojis
@@ -86,7 +86,7 @@ const showStaticEmoji = false;
                                             );
                                         })}
                                 </div>
-                            </div>
+                            </section>
                         ))}
                 </etc-emoji>
             </>
