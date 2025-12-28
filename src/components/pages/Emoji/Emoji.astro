@@ -18,7 +18,8 @@ interface Props {
 }
 
 const { domain, categories, baseUrl, status, statusText } = Astro.props;
-
+const totalEmojis = Object.values(categories).reduce((acc, emojis) => acc + emojis.length, 0);
+const totalCategories = Object.keys(categories).length - 1;
 const showStaticEmoji = false;
 ---
 
@@ -35,51 +36,60 @@ const showStaticEmoji = false;
                 <p class={styles.errorMessage}>Não tem emojis personalizados nessa instância.</p>
             </div>
         ) : (
-            <etc-emoji class={styles.root}>
-                {Object.entries(categories)
-                    .sort(([a], [b]) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase()))
-                    .map(([category, emojis]) => (
-                        <div class={styles.emojiCategory}>
-                            <h2>{category || 'Sem categoria'}</h2>
-                            <div class={styles.emojiGrid}>
-                                {emojis
-                                    .sort((a, b) =>
-                                        a.code
-                                            .toLocaleLowerCase()
-                                            .localeCompare(b.code.toLocaleLowerCase())
-                                    )
-                                    .map(emoji => {
-                                        const src =
-                                            baseUrl +
-                                            (showStaticEmoji ? emoji.static_url : emoji.url);
-                                        return (
-                                            <button
-                                                aria-label={emoji.code}
-                                                class={styles.emojiButton}
-                                            >
-                                                <img
-                                                    class={styles.image}
-                                                    aria-disabled="true"
-                                                    src={src}
-                                                    width="32"
-                                                    height="32"
-                                                    decoding="async"
-                                                    loading="lazy"
-                                                    alt=""
-                                                />
-                                                <div
-                                                    class:list={[styles.caption, 'caption']}
-                                                    aria-disabled="true"
+            <>
+                <p>
+                    {totalCategories > 0
+                        ? `Mostrando ${totalEmojis} emojis em ${totalCategories} categorias.`
+                        : `Mostrando ${totalEmojis} emojis.`}
+                </p>
+                <etc-emoji class={styles.root}>
+                    {Object.entries(categories)
+                        .sort(([a], [b]) =>
+                            a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase())
+                        )
+                        .map(([category, emojis]) => (
+                            <div class={styles.emojiCategory}>
+                                <h2>{category || 'Sem categoria'}</h2>
+                                <div class={styles.emojiGrid}>
+                                    {emojis
+                                        .sort((a, b) =>
+                                            a.code
+                                                .toLocaleLowerCase()
+                                                .localeCompare(b.code.toLocaleLowerCase())
+                                        )
+                                        .map(emoji => {
+                                            const src =
+                                                baseUrl +
+                                                (showStaticEmoji ? emoji.static_url : emoji.url);
+                                            return (
+                                                <button
+                                                    aria-label={emoji.code}
+                                                    class={styles.emojiButton}
                                                 >
-                                                    :{emoji.code}:
-                                                </div>
-                                            </button>
-                                        );
-                                    })}
+                                                    <img
+                                                        class={styles.image}
+                                                        aria-disabled="true"
+                                                        src={src}
+                                                        width="32"
+                                                        height="32"
+                                                        decoding="async"
+                                                        loading="lazy"
+                                                        alt=""
+                                                    />
+                                                    <div
+                                                        class:list={[styles.caption, 'caption']}
+                                                        aria-disabled="true"
+                                                    >
+                                                        :{emoji.code}:
+                                                    </div>
+                                                </button>
+                                            );
+                                        })}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-            </etc-emoji>
+                        ))}
+                </etc-emoji>
+            </>
         )
     }
 </div>
