@@ -1,6 +1,6 @@
 import { Bind, Listen } from '@/utils/decorators';
 
-export default class EmojiPicker extends HTMLElement {
+export default class Emoji extends HTMLElement {
     @Bind
     @Listen('this', 'click')
     private handleEvent(event: Event) {

@@ -1,8 +1,14 @@
 @import '@/styles/breakpoints.css';
 
+.root {
+    & > * {
+        grid-column: 1 / -1;
+    }
+}
+
 .emojiGrid {
     --width: var(--grid-content-width);
-    --gap-vertical: 0.2rem;
+    --gap-vertical: 0.4rem;
     --gap-emoji: 1.5rem;
     --image-size: 3rem;
 
@@ -79,12 +85,6 @@
     }
 }
 
-@media (--medium) {
-    .emojiGrid {
-        --width: calc(3 * var(--grid-col-width) + 2 * var(--grid-gap));
-    }
-}
-
 @media (width >= 960px) {
     .emojiGrid {
         --width: calc(2 * var(--grid-col-width) + var(--grid-gap));
@@ -103,13 +103,7 @@
     }
 }
 
-@media (--xlarge) {
-    .emojiGrid {
-        --width: calc(3 * var(--grid-col-width) + 2 * var(--grid-gap));
-    }
-}
-
-@media (--xxlarge) {
+@media (width >= 1600px) {
     .emojiGrid {
         --width: calc(2 * var(--grid-col-width) + var(--grid-gap));
     }

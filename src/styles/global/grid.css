@@ -2,7 +2,7 @@
 
 :root {
     --grid-margin: 20px;
-    --grid-gap: 10px;
+    --grid-gap: 20px;
     --grid-columns: 6;
 
     --grid-content-width: calc(100vw - var(--grid-margin) * 2);
@@ -24,9 +24,9 @@
     }
 }
 
-@media (--xlarge) {
+@media (--xxlarge) {
     :root {
-        --grid-margin: calc(50px + (100vw - 1600px) / 2);
+        --grid-margin: calc(50px + (100vw - var(--xxlarge)) / 2);
     }
 }
 

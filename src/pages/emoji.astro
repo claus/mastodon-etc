@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import EmojiPicker from '@/components/ui/EmojiPicker/EmojiPicker.astro';
+import EmojiPage from '@/components/pages/Emoji/Emoji.astro';
 import { fetchEmojis } from '@/utils/emoji';
 
 const data = await fetchEmojis();
@@ -10,9 +10,8 @@ const description = 'Emoji.';
 ---
 
 <Layout title={title} description={description}>
-    <h1>Emojis Personalizados da {data.domain}</h1>
-
-    <EmojiPicker
+    <EmojiPage
+        domain="mastodon.com.br"
         categories={data.categories}
         baseUrl={data.baseUrl}
         status={data.status}
