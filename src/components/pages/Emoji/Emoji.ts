@@ -1,15 +1,16 @@
 import { Bind, Listen } from '@/utils/decorators';
+import styles from './Emoji.module.css';
 
 export default class Emoji extends HTMLElement {
     @Bind
     @Listen('this', 'click')
     protected handleEvent(event: Event) {
         const target = event.target as HTMLElement;
-        const button = target.closest<HTMLButtonElement>('button:has(.caption)');
+        const button = target.closest<HTMLButtonElement>(`button:has(.${styles.caption})`);
         if (!button) return;
 
         const code = button.getAttribute('aria-label');
-        const caption = button.querySelector<HTMLDivElement>(':scope > .caption');
+        const caption = button.querySelector<HTMLDivElement>(`:scope > .${styles.caption}`);
         if (code && caption) {
             navigator.clipboard
                 .writeText(`:${code}:`)

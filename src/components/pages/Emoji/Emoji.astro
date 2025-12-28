@@ -62,10 +62,7 @@ const showStaticEmoji = false;
                                                 baseUrl +
                                                 (showStaticEmoji ? emoji.static_url : emoji.url);
                                             return (
-                                                <button
-                                                    aria-label={emoji.code}
-                                                    class={styles.emojiButton}
-                                                >
+                                                <button aria-label={emoji.code}>
                                                     <img
                                                         class={styles.image}
                                                         src={src}
@@ -75,12 +72,9 @@ const showStaticEmoji = false;
                                                         loading="lazy"
                                                         alt=""
                                                     />
-                                                    <div
-                                                        class:list={[styles.caption, 'caption']}
-                                                        aria-hidden="true"
-                                                    >
+                                                    <span class={styles.caption} aria-hidden="true">
                                                         :{emoji.code}:
-                                                    </div>
+                                                    </span>
                                                 </button>
                                             );
                                         })}

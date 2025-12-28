@@ -18,7 +18,7 @@
     margin-top: 1.5rem;
 }
 
-.emojiButton {
+.emojiGrid > button {
     display: flex;
     position: relative;
     align-items: center;
