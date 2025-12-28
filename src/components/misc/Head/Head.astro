@@ -22,6 +22,4 @@ const { title, description, image, url, preloads = [] } = Astro.props;
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@cwahlers" />
-{preloads.map(preload => (
-    <link rel="preload" as="image" {...preload} />
-))}
+{preloads.map(preload => <link rel="preload" as="image" {...preload} />)}

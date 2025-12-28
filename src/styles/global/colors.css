@@ -3,30 +3,28 @@
     --brand-saturation: 100%;
     --brand-lightness: 50%;
 
-    --brand-dark: hsl(0 var(--brand-saturation) var(--brand-lightness));
-    --brand-light: hsl(
-        0 calc(var(--brand-saturation) / 2) calc(var(--brand-lightness) / 1.5)
-    );
+    --brand-dark: hsl(0deg var(--brand-saturation) var(--brand-lightness));
+    --brand-light: hsl(0deg calc(var(--brand-saturation) / 2) calc(var(--brand-lightness) / 1.5));
 
-    --text0-light: hsl(0 0% 0%);
-    --text1-light: hsl(0 0% 10%);
-    --text2-light: hsl(0 0% 20%);
-    --text0-dark: hsl(0 0% 100%);
-    --text1-dark: hsl(0 0% 85%);
-    --text2-dark: hsl(0 0% 65%);
+    --text0-light: hsl(0deg 0% 0%);
+    --text1-light: hsl(0deg 0% 10%);
+    --text2-light: hsl(0deg 0% 20%);
+    --text0-dark: hsl(0deg 0% 100%);
+    --text1-dark: hsl(0deg 0% 85%);
+    --text2-dark: hsl(0deg 0% 65%);
 
-    --surface1-light: hsl(0 0% 90%);
-    --surface2-light: hsl(0 0% 99%);
-    --surface3-light: hsl(0 0% 92%);
-    --surface4-light: hsl(0 0% 85%);
-    --surface1-dark: hsl(0 0% 5%);
-    --surface2-dark: hsl(0 0% 10%);
-    --surface3-dark: hsl(0 0% 20%);
-    --surface4-dark: hsl(0 0% 25%);
+    --surface1-light: hsl(0deg 0% 90%);
+    --surface2-light: hsl(0deg 0% 99%);
+    --surface3-light: hsl(0deg 0% 92%);
+    --surface4-light: hsl(0deg 0% 85%);
+    --surface1-dark: hsl(0deg 0% 5%);
+    --surface2-dark: hsl(0deg 0% 10%);
+    --surface3-dark: hsl(0deg 0% 20%);
+    --surface4-dark: hsl(0deg 0% 25%);
 
     /* Info blue */
     --info-hue: 203;
-    --info: hsla(var(--info-hue) 100% 50%);
+    --info: hsl(var(--info-hue) 100% 50%);
 
     /* Success green */
     --success-hue: 120;
@@ -39,7 +37,7 @@
     /* Failure red */
     --failure-hue: 2;
     --failure: hsl(var(--failure-hue) 100% 50%);
-    --failure-surface1-dark: hsla(var(--failure-hue) 100% 50% / 0.3);
+    --failure-surface1-dark: hsl(var(--failure-hue) 100% 50% / 0.3);
 
     &[data-theme='dark'] {
         color-scheme: dark;

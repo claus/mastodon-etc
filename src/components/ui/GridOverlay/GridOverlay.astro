@@ -1,26 +1,23 @@
 ---
-import cx from 'clsx';
-
 import styles from './GridOverlay.module.css';
 ---
 
 {
     import.meta.env.DEV && (
-        <x-grid-overlay>
+        <grid-overlay>
             <div class:list={[styles.gridOverlay, 'grid']}>
                 {Array.from({ length: 12 }).map((_, i) => {
-                    const columnClass = cx(styles.col, styles[`col${i + 1}`]);
-                    return <div class={columnClass} />;
+                    return <div class:list={[styles.col, styles[`col${i + 1}`]]} />;
                 })}
             </div>
-        </x-grid-overlay>
+        </grid-overlay>
     )
 }
 
 <script>
     import GridOverlay from './GridOverlay';
 
-    if (!customElements.get('x-grid-overlay')) {
-        customElements.define('x-grid-overlay', GridOverlay);
+    if (!customElements.get('grid-overlay')) {
+        customElements.define('grid-overlay', GridOverlay);
     }
 </script>

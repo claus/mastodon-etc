@@ -3,7 +3,7 @@ import { Bind, Listen } from '@/utils/decorators';
 export default class Emoji extends HTMLElement {
     @Bind
     @Listen('this', 'click')
-    private handleEvent(event: Event) {
+    protected handleEvent(event: Event) {
         const target = event.target as HTMLElement;
         const button = target.closest<HTMLButtonElement>('button:has(.caption)');
         if (!button) return;

@@ -1,9 +1,8 @@
 {
-  "name": "astro-starter-ts",
-  "description": "A skeleton Astro app to quickly get started.",
-  "version": "0.1.0",
-  "author": "HAUS",
-  "private": true,
+  "name": "mastodon-etc",
+  "description": "The etc.mastodon.com.br website.",
+  "version": "1.0.0",
+  "author": "Claus Wahlers",
   "engines": {
     "node": "^22"
   },
@@ -22,11 +21,7 @@
     "prettier-fix": "prettier -w .",
     "stylelint": "stylelint \"**/*.css\"",
     "stylelint-fix": "stylelint --fix \"**/*.css\"",
-    "lint": "eslint . && npm run stylelint && npm run prettier",
-    "generate-types": "graphql-codegen --config codegen.ts",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "lint": "eslint . && npm run stylelint && npm run prettier"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -35,17 +30,10 @@
     "@astrojs/vercel": "^9.0.2",
     "@madeinhaus/utils": "^2.2.0",
     "astro": "^5.16.5",
-    "astro-vtbot": "^2.1.9",
-    "graffle": "^8.0.0-next.222",
-    "graphql": "^16.12.0",
-    "nanostores": "^1.1.0",
+    "semver": "^7.7.3",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^6.1.0",
-    "@graphql-codegen/typed-document-node": "^6.1.4",
-    "@graphql-codegen/typescript": "^5.0.6",
-    "@graphql-codegen/typescript-operations": "^5.0.6",
     "@madeinhaus/prettier-config": "^1.2.1",
     "@testing-library/dom": "^10.4.1",
     "@typescript-eslint/eslint-plugin": "^8.49.0",
@@ -63,7 +51,6 @@
     "shelljs": "^0.10.0",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1",
-    "stylelint-css-modules": "^1.2.2",
-    "vitest": "^4.0.15"
+    "stylelint-css-modules": "^1.2.2"
   }
 }
