@@ -1,0 +1,52 @@
+---
+// Global styles
+import '@/styles/global/reset.css';
+import '@/styles/global/grid.css';
+import '@/styles/global/colors.css';
+import '@/styles/global/variables.css';
+import '@/styles/global/typography.css';
+import '@/styles/global/defaults.css';
+import '@/styles/global/theme.css';
+
+import { Font } from 'astro:assets';
+
+import ThemeInit from '@/components/ui/Theme/ThemeInit.astro';
+import GridOverlay from '@/components/ui/GridOverlay/GridOverlay.astro';
+
+import styles from './Layout.module.css';
+
+const fontPreloadAtkinson = [
+    { weight: 400, style: 'normal' },
+    { weight: 700, style: 'normal' },
+];
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const { title = 'ETC', description = 'ETC' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
+        <Font cssVariable="--font-atkinson" preload={fontPreloadAtkinson} />
+        <Font cssVariable="--font-fira" />
+        <ThemeInit />
+    </head>
+    <body>
+        <main class:list={[styles.main, 'body']}>
+            <slot />
+        </main>
+        <GridOverlay />
+    </body>
+</html>

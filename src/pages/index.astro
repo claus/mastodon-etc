@@ -1,0 +1,14 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Home from '@/components/pages/Home/Home.astro';
+import type { MarkdownInstance } from 'astro';
+import type { PostFrontmatter } from '@/types';
+
+const posts = Object.values(
+    import.meta.glob<MarkdownInstance<PostFrontmatter>>('./posts/*.mdx', { eager: true })
+);
+---
+
+<Layout>
+    <Home posts={posts} />
+</Layout>

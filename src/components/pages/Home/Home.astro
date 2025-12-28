@@ -1,0 +1,32 @@
+---
+import type { MarkdownInstance } from 'astro';
+import type { PostFrontmatter } from '@/types';
+import Link from '@/components/ui/Link/Link.astro';
+import styles from './Home.module.css';
+
+interface Props {
+    posts?: MarkdownInstance<PostFrontmatter>[];
+}
+
+const { posts = [] } = Astro.props;
+---
+
+<div class:list={['grid', styles.root]}>
+    <h1>Et Cetera</h1>
+    <ul>
+        <li>
+            <Link href="/emoji">Emojis Personalizados</Link>
+            <p>Emoji.</p>
+        </li>
+        {
+            posts
+                .filter(post => !!post.url)
+                .map(post => (
+                    <li>
+                        <Link href={post.url!}>{post.frontmatter.title}</Link>
+                        <p>{post.frontmatter.description}</p>
+                    </li>
+                ))
+        }
+    </ul>
+</div>

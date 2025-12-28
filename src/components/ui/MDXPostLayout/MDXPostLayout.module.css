@@ -1,0 +1,21 @@
+@import '@/styles/breakpoints.css';
+
+.root {
+    > * {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (--large) {
+    .root {
+        > * {
+            grid-column: 1 / -6;
+        }
+
+        > h1,
+        > h2,
+        > img {
+            grid-column: 1 / -1;
+        }
+    }
+}

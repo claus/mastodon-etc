@@ -1,29 +1,78 @@
-export const uiComponentJS = name => `import PropTypes from 'prop-types';
-import cx from 'classnames';
+export const uiComponentAstro = (name, customElementName) => `---
+import styles from './${name}.module.css';
 
-import styles from './${name}.module.scss';
+interface Props {
+    className?: string;
+}
 
-const ${name} = ({ className }) => {
-    return (
-        <div className={cx(styles.root, className)}>
+const { className } = Astro.props;
+---
 
-        </div>
-    );
-};
+<${customElementName}>
+    <div class:list={[styles.root, className]}></div>
+</${customElementName}>
 
-${name}.propTypes = {
-    className: PropTypes.string,
-};
+<script>
+    class ${name} extends HTMLElement {
+        constructor() {
+            super();
+        }
 
-export default ${name};
+        connectedCallback() {}
+
+        disconnectedCallback() {}
+    }
+
+    if (!customElements.get('${customElementName}')) {
+        customElements.define('${customElementName}', ${name});
+    }
+</script>
 `;
 
-export const uiComponentSCSS = () => `@import 'styles/breakpoints';
-@import 'styles/fonts';
+export const uiComponentAstroExternalTS = (name, customElementName) => `---
+import styles from './${name}.module.css';
 
-.root {
+interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<${customElementName}>
+    <div class:list={[styles.root, className]}>
+    </div>
+</${customElementName}>
+
+<script>
+    import ${name} from './${name}';
+
+    if (!customElements.get('${customElementName}')) {
+        customElements.define('${customElementName}', ${name});
+    }
+</script>
+`;
+
+export const uiComponentTS = name => `export default class ${name} extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {}
+
+    disconnectedCallback() {}
 }
 `;
 
-export const uiComponentIndex = name => `export { default } from './${name}';
+export const uiComponentCSS = () => `.root {
+}
+
+@media (width >= 768px) {
+}
+
+@media (width >= 1280px) {
+}
+
+@media (width >= 1920px) {
+}
 `;

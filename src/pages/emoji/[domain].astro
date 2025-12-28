@@ -1,0 +1,24 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import EmojiPage from '@/components/pages/Emoji/Emoji.astro';
+import { fetchEmojis } from '@/utils/emoji';
+
+const data = await fetchEmojis(Astro.params.domain);
+
+const title = `Emojis Personalizados da ${data.domain}`;
+const description = `Visualizador de emojis personalizados da instância ${data.domain}`;
+
+if (data.status >= 400) {
+    Astro.response.status = data.status;
+}
+---
+
+<Layout title={title} description={description}>
+    <EmojiPage
+        domain={data.domain}
+        categories={data.categories}
+        baseUrl={data.baseUrl}
+        status={data.status}
+        statusText={data.statusText}
+    />
+</Layout>

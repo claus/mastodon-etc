@@ -1,12 +1,24 @@
 {
+    "extends": ["stylelint-config-standard", "stylelint-css-modules"],
     "rules": {
+        "at-rule-empty-line-before": null,
+        "declaration-empty-line-before": null,
+        "custom-property-empty-line-before": null,
+        "declaration-block-no-redundant-longhand-properties": null,
+        "alpha-value-notation": null,
+        "at-rule-no-vendor-prefix": true,
         "block-no-empty": null,
+        "color-function-notation": null,
         "color-no-hex": null,
         "color-no-invalid-hex": true,
-        "at-rule-no-vendor-prefix": true,
-        "declaration-colon-space-after": "always",
-        "max-empty-lines": 1,
+        "custom-property-pattern": null,
+        "font-family-name-quotes": "always-unless-keyword",
+        "keyframes-name-pattern": null,
+        "no-descending-specificity": null,
         "max-nesting-depth": 4,
+        "selector-class-pattern": null,
+        "import-notation": "string",
+        "property-no-unknown": [true, { "ignoreProperties": ["composes"] }],
         "rule-empty-line-before": [
             "always",
             {
@@ -14,49 +26,11 @@
                 "ignore": ["after-comment"]
             }
         ],
-        "comment-empty-line-before": [
-            "always",
+        "selector-pseudo-class-no-unknown": [
+            true,
             {
-                "ignore": ["stylelint-commands", "after-comment"]
+                "ignorePseudoClasses": ["global", "local"]
             }
-        ],
-        "unit-case": "lower",
-        "unit-allowed-list": [
-            "em",
-            "ex",
-            "cap",
-            "ch",
-            "ic",
-            "rem",
-            "lh",
-            "rlh",
-            "vw",
-            "vh",
-            "vi",
-            "vb",
-            "vmin",
-            "vmax",
-            "cm",
-            "mm",
-            "Q",
-            "in",
-            "pc",
-            "pt",
-            "px",
-            "deg",
-            "grad",
-            "rad",
-            "turn",
-            "s",
-            "ms",
-            "Hz",
-            "kHz",
-            "dpi",
-            "dpcm",
-            "dppx",
-            "x",
-            "%",
-            "fr"
         ]
     }
 }

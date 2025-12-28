@@ -1,0 +1,13 @@
+:root {
+    --small: 576px;
+    --medium: 768px;
+    --large: 1024px;
+    --xlarge: 1440px;
+    --xxlarge: 1920px;
+}
+
+@custom-media --small (width >= 576px);
+@custom-media --medium (width >= 768px);
+@custom-media --large (width >= 1024px);
+@custom-media --xlarge (width >= 1440px);
+@custom-media --xxlarge (width >= 1920px);

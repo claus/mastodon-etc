@@ -1,0 +1,20 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import EmojiPage from '@/components/pages/Emoji/Emoji.astro';
+import { fetchEmojis } from '@/utils/emoji';
+
+const data = await fetchEmojis();
+
+const title = 'Emojis Personalizados da mastodon.com.br';
+const description = 'Visualizador de emojis personalizados da instância mastodon.com.br';
+---
+
+<Layout title={title} description={description}>
+    <EmojiPage
+        domain="mastodon.com.br"
+        categories={data.categories}
+        baseUrl={data.baseUrl}
+        status={data.status}
+        statusText={data.statusText}
+    />
+</Layout>

@@ -1,0 +1,21 @@
+---
+import styles from './MDXImage.module.css';
+
+interface Props {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    class?: string;
+}
+
+const { src, alt, width, height, class: className } = Astro.props;
+---
+
+<img
+    src={src}
+    alt={alt}
+    width={width / 2}
+    height={height / 2}
+    class:list={[styles.root, className]}
+/>

@@ -1,0 +1,113 @@
+@import '@/styles/breakpoints.css';
+
+.root {
+    & > * {
+        grid-column: 1 / -1;
+    }
+}
+
+.emojiGrid {
+    --width: var(--grid-content-width);
+    --gap-vertical: 0.4rem;
+    --gap-emoji: 1.5rem;
+    --image-size: 3rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-vertical) var(--grid-gap);
+    margin-top: 1.5rem;
+}
+
+.emojiButton {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: var(--gap-emoji);
+    width: var(--width);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+
+    .image {
+        width: var(--image-size);
+        height: var(--image-size);
+        object-fit: contain;
+        margin: 0;
+    }
+
+    .caption {
+        width: calc(100% - var(--image-size) - var(--gap-emoji));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:global(.copied) {
+            font-weight: 700;
+            color: var(--success);
+        }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover,
+        &:focus-visible {
+            .caption {
+                font-weight: 700;
+                color: var(--text0);
+
+                &:global(.copied) {
+                    color: var(--success);
+                }
+            }
+        }
+    }
+}
+
+.error {
+    padding: 1.5ch 2ch;
+    margin-top: 5rem;
+    background-color: var(--failure-surface1);
+}
+
+.errorTitle,
+.errorMessage {
+    margin: 0;
+    color: var(--text1);
+}
+
+.errorMessage {
+    font-weight: 700;
+}
+
+@media (--small) {
+    .emojiGrid {
+        --width: calc(3 * var(--grid-col-width) + 2 * var(--grid-gap));
+    }
+}
+
+@media (width >= 960px) {
+    .emojiGrid {
+        --width: calc(2 * var(--grid-col-width) + var(--grid-gap));
+    }
+}
+
+@media (--large) {
+    .emojiGrid {
+        --width: calc(4 * var(--grid-col-width) + 3 * var(--grid-gap));
+    }
+}
+
+@media (width >= 1280px) {
+    .emojiGrid {
+        --width: calc(3 * var(--grid-col-width) + 2 * var(--grid-gap));
+    }
+}
+
+@media (width >= 1600px) {
+    .emojiGrid {
+        --width: calc(2 * var(--grid-col-width) + var(--grid-gap));
+    }
+}
