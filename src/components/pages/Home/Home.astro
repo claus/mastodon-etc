@@ -1,79 +1,32 @@
 ---
+import type { MarkdownInstance } from 'astro';
+import type { PostFrontmatter } from '@/types';
+import Link from '@/components/ui/Link/Link.astro';
 import styles from './Home.module.css';
 
-const GITHUB_URL = 'https://github.com/MadeInHaus/astro-starter-ts';
+interface Props {
+    posts?: MarkdownInstance<PostFrontmatter>[];
+}
 
-const demoLinks = [{ href: '/demos/carousel', label: 'Carousel' }];
+const { posts = [] } = Astro.props;
 ---
 
-<div class:list={[styles.root, 'grid']}>
-    <section class={styles.section}>
-        <h2 class={styles.sectionHeadline} data-reveal="none">Demos</h2>
-        <ul>
-            {
-                demoLinks.map(({ href, label }) => (
-                    <li class={styles.link}>
-                        <a href={href}>
-                            <span>{label}</span>
-                        </a>
+<div class:list={['grid', styles.root]}>
+    <h1>Et Cetera</h1>
+    <ul>
+        <li>
+            <Link href="/emoji">Emojis Personalizados</Link>
+            <p>Emoji.</p>
+        </li>
+        {
+            posts
+                .filter(post => !!post.url)
+                .map(post => (
+                    <li>
+                        <Link href={post.url!}>{post.frontmatter.title}</Link>
+                        <p>{post.frontmatter.description}</p>
                     </li>
                 ))
-            }
-        </ul>
-    </section>
-    <section class={styles.section}>
-        <h2 class:list={[styles.sectionHeadline, 'body']} data-reveal="none">Theme</h2>
-        <theme-buttons>
-            <ul class={styles.themeButtons}>
-                <li><button data-theme="auto" class={styles.themeButton}>Automatic</button></li>
-                <li><button data-theme="light" class={styles.themeButton}>Light</button></li>
-                <li><button data-theme="dark" class={styles.themeButton}>Dark</button></li>
-            </ul>
-        </theme-buttons>
-    </section>
-    <section class={styles.section}>
-        <h2 class:list={[styles.sectionHeadline, 'body']} data-reveal="none">Source</h2>
-        <ul>
-            <li class={styles.link}>
-                <a href={GITHUB_URL}>
-                    <span>{GITHUB_URL}</span>
-                </a>
-            </li>
-        </ul>
-    </section>
+        }
+    </ul>
 </div>
-
-<script>
-    import { getTheme, setTheme, type ThemeValue } from '@/components/ui/Theme/ThemeController';
-
-    class ThemeButtons extends HTMLElement {
-        private buttons: NodeListOf<HTMLButtonElement>;
-        constructor() {
-            super();
-            this.buttons = this.querySelectorAll('button');
-            this.update();
-        }
-        connectedCallback() {
-            this.buttons.forEach(button => button.addEventListener('click', this.handleClick));
-        }
-        disconnectedCallback() {
-            this.buttons.forEach(button => button.removeEventListener('click', this.handleClick));
-        }
-        private handleClick = (event: MouseEvent) => {
-            const button = event.target as HTMLButtonElement;
-            const theme = button.dataset.theme as ThemeValue;
-            setTheme(theme ?? 'auto');
-            this.update();
-        };
-        private update() {
-            const theme = getTheme();
-            this.buttons.forEach(button => {
-                button.disabled = button.dataset.theme === theme;
-            });
-        }
-    }
-
-    if (!customElements.get('theme-buttons')) {
-        customElements.define('theme-buttons', ThemeButtons);
-    }
-</script>

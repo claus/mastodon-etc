@@ -2,19 +2,13 @@
 
 .body {
     font-family: var(--font-atkinson);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1.4;
     letter-spacing: 0.01em;
 }
 
 .code {
     font-family: var(--font-fira);
-}
-
-@media (--medium) {
-    .body {
-        font-size: 1.5rem;
-    }
 }
 
 @media (--large) {

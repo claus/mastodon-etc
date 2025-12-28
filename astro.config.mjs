@@ -6,7 +6,6 @@ import vercel from '@astrojs/vercel';
 
 dotenv.config();
 
-// https://astro.build/config
 export default defineConfig({
     site: `https://${process.env.SITE_DOMAIN}`,
     output: 'server',

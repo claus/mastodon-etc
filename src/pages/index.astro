@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Landing from '@/components/pages/Landing/Landing.astro';
+import Home from '@/components/pages/Home/Home.astro';
 import type { MarkdownInstance } from 'astro';
 import type { PostFrontmatter } from '@/types';
 
@@ -10,5 +10,5 @@ const posts = Object.values(
 ---
 
 <Layout>
-    <Landing posts={posts} />
+    <Home posts={posts} />
 </Layout>

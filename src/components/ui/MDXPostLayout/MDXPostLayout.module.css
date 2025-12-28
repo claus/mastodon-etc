@@ -7,7 +7,7 @@
 }
 
 @media (--large) {
-    .post {
+    .root {
         > * {
             grid-column: 1 / -6;
         }

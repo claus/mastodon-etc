@@ -9,7 +9,6 @@ import '@/styles/global/defaults.css';
 import '@/styles/global/theme.css';
 
 import { Font } from 'astro:assets';
-import { ClientRouter } from 'astro:transitions';
 
 import ThemeInit from '@/components/ui/Theme/ThemeInit.astro';
 import GridOverlay from '@/components/ui/GridOverlay/GridOverlay.astro';
@@ -43,7 +42,6 @@ const { title = 'ETC', description = 'ETC' } = Astro.props;
         <Font cssVariable="--font-atkinson" preload={fontPreloadAtkinson} />
         <Font cssVariable="--font-fira" />
         <ThemeInit />
-        <ClientRouter />
     </head>
     <body>
         <main class:list={[styles.main, 'body']}>
