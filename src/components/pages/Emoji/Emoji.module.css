@@ -32,14 +32,14 @@
     font: inherit;
     color: inherit;
 
-    .image {
+    > img {
         width: var(--image-size);
         height: var(--image-size);
         object-fit: contain;
         margin: 0;
     }
 
-    .caption {
+    > span {
         width: calc(100% - var(--image-size) - var(--gap-emoji));
         overflow: hidden;
         white-space: nowrap;
@@ -54,7 +54,7 @@
     @media (hover: hover) and (pointer: fine) {
         &:hover,
         &:focus-visible {
-            .caption {
+            > span {
                 font-weight: 700;
                 color: var(--text0);
 

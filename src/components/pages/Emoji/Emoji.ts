@@ -1,20 +1,22 @@
 import { Bind, Listen } from '@/utils/decorators';
-import styles from './Emoji.module.css';
 
 export default class Emoji extends HTMLElement {
     @Bind
     @Listen('this', 'click')
     protected handleEvent(event: Event) {
-        const target = event.target as HTMLElement;
-        const button = target.closest<HTMLButtonElement>(`button:has(.${styles.caption})`);
+        const target = event.target as Element;
+
+        const button = target.closest<HTMLButtonElement>(`button:has(img, span)`);
         if (!button) return;
 
         const code = button.getAttribute('aria-label');
-        const caption = button.querySelector<HTMLDivElement>(`:scope > .${styles.caption}`);
-        if (code && caption) {
-            navigator.clipboard
-                .writeText(`:${code}:`)
-                .then(() => {
+        if (!code) return;
+
+        navigator.clipboard
+            .writeText(`:${code}:`)
+            .then(() => {
+                const caption = button.querySelector<HTMLSpanElement>(`:scope > span`);
+                if (caption) {
                     const prevTimeoutId = caption.dataset.timeoutId;
                     if (prevTimeoutId) {
                         window.clearTimeout(Number(prevTimeoutId));
@@ -29,10 +31,10 @@ export default class Emoji extends HTMLElement {
                     caption.dataset.captionText ??= caption.textContent;
                     caption.classList.add('copied');
                     caption.textContent = 'copiado ✓';
-                })
-                .catch(err => {
-                    console.error('Failed to copy emoji:', err);
-                });
-        }
+                }
+            })
+            .catch(err => {
+                console.error('Failed to copy emoji:', err);
+            });
     }
 }

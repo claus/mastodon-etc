@@ -20,7 +20,6 @@ interface Props {
 const { domain, categories, baseUrl, status, statusText } = Astro.props;
 const totalEmojis = Object.values(categories).reduce((acc, emojis) => acc + emojis.length, 0);
 const totalCategories = Object.keys(categories).length - 1;
-const showStaticEmoji = false;
 ---
 
 <div class:list={['grid', styles.root]}>
@@ -58,13 +57,10 @@ const showStaticEmoji = false;
                                                 .localeCompare(b.code.toLocaleLowerCase())
                                         )
                                         .map(emoji => {
-                                            const src =
-                                                baseUrl +
-                                                (showStaticEmoji ? emoji.static_url : emoji.url);
+                                            const src = baseUrl + emoji.url;
                                             return (
                                                 <button aria-label={emoji.code}>
                                                     <img
-                                                        class={styles.image}
                                                         src={src}
                                                         width="32"
                                                         height="32"
@@ -72,9 +68,7 @@ const showStaticEmoji = false;
                                                         loading="lazy"
                                                         alt=""
                                                     />
-                                                    <span class={styles.caption} aria-hidden="true">
-                                                        :{emoji.code}:
-                                                    </span>
+                                                    <span aria-hidden="true">:{emoji.code}:</span>
                                                 </button>
                                             );
                                         })}
