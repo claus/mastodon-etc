@@ -31,36 +31,39 @@
     text-align: left;
     font: inherit;
     color: inherit;
-}
 
-@media (hover: hover) and (pointer: fine) {
-    .emojiButton:hover .caption {
-        font-weight: 700;
-        color: var(--text0);
+    .image {
+        width: var(--image-size);
+        height: var(--image-size);
+        object-fit: contain;
+        margin: 0;
     }
 
-    .emojiButton:hover .caption:global(.copied) {
-        color: var(--success);
+    .caption {
+        width: calc(100% - var(--image-size) - var(--gap-emoji));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:global(.copied) {
+            font-weight: 700;
+            color: var(--success);
+        }
     }
-}
 
-.image {
-    width: var(--image-size);
-    height: var(--image-size);
-    object-fit: contain;
-    margin: 0;
-}
+    @media (hover: hover) and (pointer: fine) {
+        &:hover,
+        &:focus-visible {
+            .caption {
+                font-weight: 700;
+                color: var(--text0);
 
-.caption {
-    width: calc(100% - var(--image-size) - var(--gap-emoji));
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.caption:global(.copied) {
-    font-weight: 700;
-    color: var(--success);
+                &:global(.copied) {
+                    color: var(--success);
+                }
+            }
+        }
+    }
 }
 
 .error {
