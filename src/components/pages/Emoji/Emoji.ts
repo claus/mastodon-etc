@@ -1,7 +1,6 @@
-import { Bind, Listen } from '@/utils/decorators';
+import { Listen } from '@/utils/decorators';
 
 export default class Emoji extends HTMLElement {
-    @Bind
     @Listen('this', 'click')
     protected handleEvent(event: Event) {
         const target = event.target as Element;
