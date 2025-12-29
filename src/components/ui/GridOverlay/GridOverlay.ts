@@ -1,21 +1,15 @@
+import { Listen, Bind, Ref } from '@/utils/decorators';
+
 export default class GridOverlay extends HTMLElement {
-    constructor() {
-        super();
-    }
+    @Ref('grid')
+    declare protected grid: HTMLElement;
 
-    connectedCallback() {
-        document.addEventListener('keypress', this.handleKey);
-    }
-
-    disconnectedCallback() {
-        document.removeEventListener('keypress', this.handleKey);
-    }
-
-    private handleKey = (event: KeyboardEvent) => {
+    @Bind
+    @Listen('document', 'keypress')
+    protected handleKeypress(event: KeyboardEvent) {
         const target = event.target as HTMLElement;
         if (event.key === 'g' && target.nodeName !== 'INPUT') {
-            const el = this.querySelector(':scope > div');
-            el?.classList.toggle('visible');
+            this.grid.classList.toggle('visible');
         }
-    };
+    }
 }

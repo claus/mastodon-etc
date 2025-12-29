@@ -5,7 +5,7 @@ import styles from './GridOverlay.module.css';
 {
     import.meta.env.DEV && (
         <grid-overlay>
-            <div class:list={[styles.gridOverlay, 'grid']}>
+            <div class:list={[styles.gridOverlay, 'grid']} data-ref="grid">
                 {Array.from({ length: 12 }).map((_, i) => {
                     return <div class:list={[styles.col, styles[`col${i + 1}`]]} />;
                 })}
