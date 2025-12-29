@@ -52,26 +52,21 @@ const totalCategories = Object.keys(categories).length - 1;
                                 <div class={styles.emojiGrid}>
                                     {emojis
                                         .sort((a, b) =>
-                                            a.code
-                                                .toLocaleLowerCase()
-                                                .localeCompare(b.code.toLocaleLowerCase())
+                                            a.code.toLowerCase().localeCompare(b.code.toLowerCase())
                                         )
-                                        .map(emoji => {
-                                            const src = baseUrl + emoji.url;
-                                            return (
-                                                <button aria-label={emoji.code}>
-                                                    <img
-                                                        src={src}
-                                                        width="32"
-                                                        height="32"
-                                                        decoding="async"
-                                                        loading="lazy"
-                                                        alt=""
-                                                    />
-                                                    <span aria-hidden="true">:{emoji.code}:</span>
-                                                </button>
-                                            );
-                                        })}
+                                        .map(emoji => (
+                                            <button aria-label={emoji.code}>
+                                                <img
+                                                    src={baseUrl + emoji.url}
+                                                    width="32"
+                                                    height="32"
+                                                    decoding="async"
+                                                    loading="lazy"
+                                                    alt=""
+                                                />
+                                                <span aria-hidden="true">:{emoji.code}:</span>
+                                            </button>
+                                        ))}
                                 </div>
                             </section>
                         ))}

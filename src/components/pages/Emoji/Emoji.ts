@@ -6,7 +6,7 @@ export default class Emoji extends HTMLElement {
     protected handleEvent(event: Event) {
         const target = event.target as Element;
 
-        const button = target.closest<HTMLButtonElement>(`button:has(img, span)`);
+        const button = target.closest<HTMLButtonElement>('button:has(img, span)');
         if (!button) return;
 
         const code = button.getAttribute('aria-label');
@@ -15,23 +15,25 @@ export default class Emoji extends HTMLElement {
         navigator.clipboard
             .writeText(`:${code}:`)
             .then(() => {
-                const caption = button.querySelector<HTMLSpanElement>(`:scope > span`);
-                if (caption) {
-                    const prevTimeoutId = caption.dataset.timeoutId;
-                    if (prevTimeoutId) {
-                        window.clearTimeout(Number(prevTimeoutId));
-                    }
-                    const timeoutId = window.setTimeout(() => {
-                        caption.textContent = caption.dataset.captionText ?? '';
-                        caption.classList.remove('copied');
-                        delete caption.dataset.timeoutId;
-                        delete caption.dataset.captionText;
-                    }, 1000);
-                    caption.dataset.timeoutId = timeoutId.toString();
-                    caption.dataset.captionText ??= caption.textContent;
-                    caption.classList.add('copied');
-                    caption.textContent = 'copiado ✓';
+                const label = button.querySelector<HTMLSpanElement>(':scope > span');
+                if (!label) return;
+
+                const prevTimeoutId = label.dataset.timeoutId;
+                if (prevTimeoutId) {
+                    window.clearTimeout(Number(prevTimeoutId));
                 }
+
+                const timeoutId = window.setTimeout(() => {
+                    label.textContent = label.dataset.captionText ?? '';
+                    label.classList.remove('copied');
+                    delete label.dataset.timeoutId;
+                    delete label.dataset.captionText;
+                }, 1000);
+
+                label.dataset.timeoutId = timeoutId.toString();
+                label.dataset.captionText ??= label.textContent;
+                label.classList.add('copied');
+                label.textContent = 'copiado ✓';
             })
             .catch(err => {
                 console.error('Failed to copy emoji:', err);
