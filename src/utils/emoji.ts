@@ -10,7 +10,7 @@ export const fetchEmojis = async (domain = 'mastodon.com.br') => {
         if (response.status >= 400) {
             return {
                 status: response.status,
-                statusText: `Error accessing Emoji API on ${domain} ("${response.statusText}")`,
+                statusText: `Erro ao acessar a API de emojis em ${domain} ("${response.statusText}")`,
                 categories: {},
                 baseUrl: '',
                 domain,
