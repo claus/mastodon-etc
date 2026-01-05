@@ -67,9 +67,10 @@
 }
 
 .error {
-    padding: 1.5ch 2ch;
-    margin-top: 5rem;
+    padding: 2rem 3rem;
+    margin-top: 2rem;
     background-color: var(--failure-surface1);
+    border-radius: 0.8rem;
 }
 
 .errorTitle,
