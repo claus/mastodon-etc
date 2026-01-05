@@ -7,10 +7,6 @@ const data = await fetchEmojis(Astro.params.domain);
 
 const title = `Emojis Personalizados da ${data.domain}`;
 const description = `Visualizador de emojis personalizados da instância ${data.domain}`;
-
-if (data.status >= 400) {
-    Astro.response.status = data.status;
-}
 ---
 
 <Layout title={title} description={description}>

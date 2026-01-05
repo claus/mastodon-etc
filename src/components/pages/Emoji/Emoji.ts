@@ -23,8 +23,8 @@ export default class Emoji extends HTMLElement {
                 }
 
                 const timeoutId = window.setTimeout(() => {
-                    label.textContent = label.dataset.captionText ?? '';
                     label.classList.remove('copied');
+                    label.textContent = label.dataset.captionText ?? '';
                     delete label.dataset.timeoutId;
                     delete label.dataset.captionText;
                 }, 1000);
